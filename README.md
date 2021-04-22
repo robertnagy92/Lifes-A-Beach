@@ -13,6 +13,8 @@ homepage - On the home page they can trips already planned or start a new one.
 Next pages, ask the user information about the kind of trip that they want to plan. With options to go to the previous screen or enter the information and continue to the next screen.
 The final screen will take the information provided and calculate the estimate cost as well as how much money every month the user will need to save in order to take the planned vacation.
 
+;;;;
+
 ## API routes (back-end)
 
 ## Data Structure
