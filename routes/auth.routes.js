@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
-const { Error } = require("mongoose");
 const User = require("../models/User.model.js");
 
 //when user signs in store info here:, use it in profile route
@@ -83,8 +82,5 @@ router.post("/signin", (req, res, next) => {
     });
 });
 
-router.get("/home", (req, res) => {
-  res.render("auth/home.hbs");
-});
 
 module.exports = router;
