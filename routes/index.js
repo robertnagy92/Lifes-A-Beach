@@ -26,8 +26,8 @@ router.get("/create", (req, res) => {
 });
 
 //Get route to show destination page after create page
-router.get("/destinations", (req, res) => {
-  res.render("lab/destinations.hbs");
+router.get("/destination", (req, res) => {
+  res.render("lab/destination.hbs");
 });
 
 //Get route to show budget page after destinations page
