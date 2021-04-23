@@ -35,13 +35,18 @@ router.get("/budget", (req, res) => {
   res.render("lab/budget.hbs");
 });
 
-//Get route to show time page after destination page
+//Get route to show timeuntil page after destination page
 // this page will ask the user when do they want to take the trip
-router.get("/time", (req, res) => {
-  res.render("lab/time.hbs");
+router.get("/timeuntil", (req, res) => {
+  res.render("lab/timeuntil.hbs");
 });
 
-//Get route to show luxury page after time page
+//Get route to show length of the vaction (1wk, 2wks. 3wks) after timeuntil page
+router.get("/length", (req, res) => {
+  res.render("lab/length.hbs");
+});
+
+//Get route to show luxury page after length page
 //will ask the user the level of luxury they want
 router.get("/luxury", (req, res) => {
   res.render("lab/luxury.hbs");
