@@ -68,7 +68,7 @@ router.post("/signin", (req, res, next) => {
           if (isMatching) {
             req.session.userInfo = response;
             req.app.locals.isUserLoggedIn = true;
-            res.redirect("/profile");
+            res.redirect("/home");
             console.log("worked");
           } else {
             res.render("auth/signin", {

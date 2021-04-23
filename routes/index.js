@@ -5,16 +5,6 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
-//get route to show the sign IN form
-router.get("/signin", (req, res) => {
-  res.render("lab/signin.hbs");
-});
-
-//get route to show the sign UP form
-router.get("/signup", (req, res) => {
-  res.render("lab/signup.hbs");
-});
-
 //get route for login page to view your planned vacations
 router.get("/yourtrips", (req, res) => {
   res.render("lab/yourtrips.hbs");
@@ -28,6 +18,20 @@ router.get("/create", (req, res) => {
 //Get route to show destination page after create page
 router.get("/destination", (req, res) => {
   res.render("lab/destination.hbs");
+});
+//POST route for your trips destination
+router.post("/destination/:id", (req, res, next) => {
+  //get the id
+  const { id } = req.params;
+
+  //get body with the elements to be edited
+  const { username, password } = req.body;
+  //go to the DB and edit the element
+  Trip.findByIdAndUpdate(id, { destination })
+    .then((data) => {
+      res.redirect("/");
+    })
+    .catch((err) => console.log(err));
 });
 
 //Get route to show budget page after destinations page
