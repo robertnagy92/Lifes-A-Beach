@@ -21,12 +21,25 @@ const tripSchema = new Schema({
     type: String,
     required: true,
   },
-  budget: Number,
-  timeuntil: Number,
-  length: Number,
-  luxury: String,
+
+  budget: { type: Number, required: true },
+
+  timeuntil: {
+    type: Number,
+    required: true,
+  },
+
+  length: {
+    type: Number,
+    required: true,
+  },
+
+  luxury: {
+    type: String,
+    required: true,
+  },
 });
 
-const Trip = model("trip", tipSchema);
+const Trip = model("trip", tripSchema);
 
 module.exports = Trip;
