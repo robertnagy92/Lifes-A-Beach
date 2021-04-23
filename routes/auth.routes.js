@@ -1,4 +1,3 @@
-
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const { Error } = require("mongoose");
@@ -84,8 +83,8 @@ router.post("/signin", (req, res, next) => {
     });
 });
 
-router.get("/profile", (req, res) => {
-  res.render("auth/profile.hbs");
+router.get("/home", (req, res) => {
+  res.render("auth/home.hbs");
 });
 
 module.exports = router;

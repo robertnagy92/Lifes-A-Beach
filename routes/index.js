@@ -16,7 +16,7 @@ router.get("/signup", (req, res) => {
 });
 
 //get route for login page to view your planned vacations
-router.get("/yourtips", (req, res) => {
+router.get("/yourtrips", (req, res) => {
   res.render("lab/yourtrips.hbs");
 });
 
