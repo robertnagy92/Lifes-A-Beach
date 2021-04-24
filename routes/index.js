@@ -1,5 +1,5 @@
 const router = require("express").Router();
-// const Trip = require("../models/Trip.model");
+//const Trip = require("../models/Trip.model");
 /* GET landing page */
 router.get("/", (req, res, next) => {
   res.render("index");
@@ -30,20 +30,20 @@ router.get("/home", (req, res) => {
 router.get("/create", (req, res) => {
   res.render("trips/create.hbs");
 });
-// router.post("/home/:id/create", (req, res, next) => {
-//   //get the id
-//   const { id } = req.params;
+router.post("/trips/create", (req, res, next) => {
+  //check info being sent from user
+  const { title } = req.body;
 
-//   //get body with the elements to be edited
-//   const { username, password } = req.body;
+  //use that information to create a new element in our database
+  Trip.create({ title })
+    .then((data) => {
+      res.redirect("/destination");
+    })
 
-//   //go to the DB and edit the element
-//   Trip.findByIdAndUpdate(id, { name })
-//     .then((data) => {
-//       res.redirect("/destination");
-//     })
-//     .catch((err) => console.log(err));
-// });
+    .catch((err) => console.log(err));
+
+  //send the user to a new page
+});
 
 // //********Destination Page***** */
 // //Get route to show destination page after create page
