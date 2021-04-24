@@ -115,9 +115,9 @@ router.get("/timeuntil", (req, res) => {
 
 // //******Length of trip page ********/
 // //Get route to show length of the vaction (1wk, 2wks. 3wks) after timeuntil page
-// router.get("/length", (req, res) => {
-//   res.render("length.hbs");
-// });
+router.get("/length", (req, res) => {
+  res.render("trips/length.hbs");
+});
 // //POST route for length page
 // router.post("/length/:id", (req, res, next) => {
 //   //get the id
@@ -135,9 +135,9 @@ router.get("/timeuntil", (req, res) => {
 
 // //Get route to show *******luxury****** page after length page
 // //will ask the user the level of luxury they want
-// router.get("/luxury", (req, res) => {
-//   res.render("luxury.hbs");
-// });
+router.get("/luxury", (req, res) => {
+  res.render("trips/luxury.hbs");
+});
 // //POST route for luxury page
 // router.post("/luxury/:id", (req, res, next) => {
 //   //get the id
@@ -155,9 +155,9 @@ router.get("/timeuntil", (req, res) => {
 
 // //Get route to show ****** total ****** page after luxury page
 // //this page will show the user the est total cost of the trips
-// router.get("/total", (req, res) => {
-//   res.render("total.hbs");
-// });
+router.get("/total", (req, res) => {
+  res.render("trips/total.hbs");
+});
 // //POST route for total page
 // router.post("/total/:id", (req, res, next) => {
 //   //get the id
@@ -173,9 +173,9 @@ router.get("/timeuntil", (req, res) => {
 //     .catch((err) => console.log(err));
 // });
 
-// //Get route to show pichart page after total page, breaking down the expensies
-// router.get("/piechart", (req, res) => {
-//   res.render("trips/piechart.hbs");
-// });
+//Get route to show pichart page after total page, breaking down the expensies
+router.get("/piechart", (req, res) => {
+  res.render("trips/piechart.hbs");
+});
 
 module.exports = router;
