@@ -82,7 +82,7 @@ router.post("/budget/:id", (req, res, next) => {
     })
     .catch((err) => console.log(err));
 });
-git a
+
 //*****time until the user takes their trip page  */
 //Get route to show timeuntil page after destination page
 // this page will ask the user when do they want to take the trips
