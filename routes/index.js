@@ -5,6 +5,10 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
+router.get("/home", (req, res) => {
+  res.render("auth/home.hbs");
+});
+
 //get route for login page to view your planned vacations
 router.get("/yourtrips", (req, res) => {
   res.render("trips/yourtrips.hbs");
