@@ -13,10 +13,7 @@ h1 {
 
 .welcome {
   margin-top: -100px;
-}
-
-.lifes {
-  margin-bottom: -40px;
+  font-size: 60px;
 }
 
 body {
