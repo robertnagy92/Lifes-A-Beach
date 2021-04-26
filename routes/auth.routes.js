@@ -1,6 +1,20 @@
 const router = require("express").Router();
+const passport = require('passport')
 const bcrypt = require("bcryptjs");
-const User = require("../models/User.model.js");
+const Google = require("../models/Google.model.js");
+const User = require("../models/User.model")
+
+
+//Auth with Google
+router.get('/google', passport.authenticate('google', {scope: ['profile']}))
+//Google auth callback
+router.get('/google/callback/', passport.authenticate('google', {failureRedirect: '/'}),
+    (req, res) => {
+   res.redirect('/home')
+
+  
+})
+
 
 
 router.get('/signup', (_, res, next) => {
