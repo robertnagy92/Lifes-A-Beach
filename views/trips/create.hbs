@@ -1,7 +1,12 @@
 <h1>Life's a Beach</h1>
 
-<h2>List of your current vacations planned</h2>
 
+{{#if name}}
+<h2>List of your current vacations planned:</h2>
+  <ul>
+    <li>{{name}}</li>
+  </ul>
+{{/if}}
 
 <h2>Create a new Vacation plan!</h2>
 <form action="/trips/create" method="POST">

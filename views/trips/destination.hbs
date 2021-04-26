@@ -1,5 +1,6 @@
 <h2>Choose your destination!</h2>
 
+<form action="/destination/{{id}}" method="POST">
 <label for="destination">Choose where you want to go:</label>
 
 <select name="destination" id="destination">
@@ -7,6 +8,10 @@
   <option value="Tahiti">Tahiti</option>
   <option value="Bali">Bali</option>
   <option value="Austraila">Austraila</option>
+  <option value="California">California</option>
+   <option value="Mexico">Mexico</option>
+
 </select>
 
 <button>Select</button>
+</form>

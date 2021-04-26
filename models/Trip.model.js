@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 // second collection of all the trip data
 const tripSchema = new Schema({
