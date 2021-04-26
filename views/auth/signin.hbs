@@ -1,11 +1,22 @@
-<h2>Already a member?</h2>
+<section class="settings">
 
+
+<h1>Login</h1>
 <form action="/signin" method="POST">
-  <label>Email</label>
-  <input name="email" type="text"  placeholder="Enter your email"  >
+  <label for="username">Username:</label>
+  <input type="text" name="username" placeholder="Enter your username" >
 
-  <label>Password</label>
-  <input name="password" type="password"  placeholder="Enter your Password"  >
-  <button>Sign in</button>
+  <label for="password">Password:</label>
+  <input type="password" name="password" placeholder="Enter your passowrd *****">
+
+  <button type="submit">Submit</button>
 </form>
+<br><br>
+<a href="/">Go back</a>
 
+{{#if msg}}
+
+<p>{{msg}}</p>
+
+{{/if}}
+</section>

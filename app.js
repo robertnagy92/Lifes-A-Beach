@@ -18,6 +18,11 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require("./config")(app);
 
+//Passport config
+const passport = require('passport')
+require('./config/passport')(passport)
+
+
 // default value for title local
 const projectName = "LifesABeach";
 const capitalized = (string) =>
@@ -41,7 +46,7 @@ app.use(
     },
     store: MongoStore.create({
       mongoUrl:
-        process.env.MONGODB_URI || "mongodb://localhost/lab-express-basic-auth",
+        process.env.MONGODB_URI || "mongodb://localhost/LifesABeach",
       ttl: 24 * 60 * 60, // 1 day => in seconds
     }),
   })
@@ -49,12 +54,22 @@ app.use(
 
 //By default it will create a  sessions collection in that DB
 
-// 👇 Start handling routes here
-const index = require("./routes/index");
-app.use("/", index);
+//Passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
 
-const authRoutes = require("./routes/auth.routes");
-app.use("/", authRoutes);
+
+// 👇 Start handling routes here
+app.use("/", require("./routes/index"));
+
+app.use("/", require("./routes/auth.routes"));
+
+app.use("/auth", require("./routes/auth.routes"));
+
+
+
+const isUserLoggedIn = require("./middleware/index");
+app.use('/', isUserLoggedIn , require('./routes/user.routes'));
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

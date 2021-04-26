@@ -1,85 +1,124 @@
 const router = require("express").Router();
+const passport = require('passport')
 const bcrypt = require("bcryptjs");
-const User = require("../models/User.model.js");
+const Google = require("../models/Google.model.js");
+const User = require("../models/User.model")
 
-//when user signs in store info here:, use it in profile route
-let userInfo = {};
 
-/* Signup Routes */
+//Auth with Google
+router.get('/google', passport.authenticate('google', {scope: ['profile']}))
+//Google auth callback
+router.get('/google/callback/', passport.authenticate('google', {failureRedirect: '/'}),
+    (req, res) => {
+   res.redirect('/home')
 
-router.get("/signup", (req, res, next) => {
-  res.render("auth/signup.hbs");
+  
+})
+
+
+
+router.get('/signup', (_, res, next) => {
+  res.status(200).render('auth/signup')
 });
 
-router.post("/signup", (req, res, next) => {
+
+router.post('/signup', (req, res, next) => {
   const { username, password } = req.body;
-  // validate input of PW and Username
+
   if (!username || !password) {
-    res.render("auth/signup.hbs", { msg: "Please enter all fields" });
+    res.render('auth/signup', { msg: 'All fields are mandatory. Please enter your username and password' })
+  }
+
+  const passwordFormatRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+  if (!passwordFormatRegex.test(password)) {
+    res.status(200).render("auth/signup", { msg: "Password needs to at least 8 characters, 1 uppercase and a number" });
     return;
   }
 
-  //Validate Password:
-  const passRe = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  if (!passRe.test(password)) {
-    res.render("auth/signup.hbs", {
-      msg:
-        "Password must be 8 characters, must have a number, and an uppercase Letter",
-    });
-    // tell node to come out of the callback code
-    return;
-  }
+  User
+    .findOne({ username })
+    .then(user => {
 
-  // encrypt the PW, create User in db:
-  const salt = bcrypt.genSaltSync(12);
-  const hash = bcrypt.hashSync(password, salt);
+      const salt = bcrypt.genSaltSync(12);
+      const hashPassword = bcrypt.hashSync(password, salt);
 
-  User.create({ username, password: hash })
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      next("ERROOOOOR", err);
-    });
-});
+      User
+        .create({ username, password: hashPassword })
+        .then((newUser) => {
+          req.session.user = newUser;
+          res.redirect("/home");
+        })
+        .catch((err) => {
+          console.error(`Error occured while creating: ${err}`);
 
-//SignIn Routes:
-router.get("/signin", (req, res, next) => {
-  res.render("auth/signin.hbs");
-});
-
-router.post("/signin", (req, res, next) => {
-  const { username, password } = req.body;
-  // validate input of PW and Username
-  User.findOne({ username })
-    .then((response) => {
-      // when email does not exists, response will be an null
-      if (!response) {
-        res.render("auth/signin.hbs", {
-          msg: "Email or password seems to be incorrect",
-        });
-      } else {
-        // 2. compare the password with bcrypt
-        // response.password is the hashed password from the db
-        // password is the one that the user typed in the input, we use from req.body
-        bcrypt.compare(password, response.password).then((isMatching) => {
-          //compare will return a true or a false
-          if (isMatching) {
-            req.session.userInfo = response;
-            req.app.locals.isUserLoggedIn = true;
-            res.redirect("/home");
-            console.log("worked");
+          if (err.code === 11000) {
+            res.status(400).render("auth/signup", {
+              msg: `This username already exists, try another one`,
+            });
           } else {
-            res.render("auth/signin", {
-              msg: "Email or password seems to be incorrect",
+            res.status(500).render("auth/signup", {
+              msg: "Oops, something went wrong with our server. Please try again",
             });
           }
         });
-      }
     })
     .catch((err) => {
+    console.error(`Error while creating new user: ${err}`)
+  })
+});
+router.get('/home', (req, res) => {
+  const { user } = req.session;
+  res.status(200).render("auth/home", user);
+});
+
+router.get('/signin', (_, res) => {
+  res.status(200).render('auth/signin');
+});
+
+router.post('/signin', (req, res, next) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    res.render('auth/signin', { msg: 'All fiels are mandatory. Please provide your username and password' })
+  }
+  User
+    .findOne({ username })
+    .then((foundUser) => {
+      if (!foundUser) {
+        res.status(200).render('auth/signin', { msg: `Username doesn't exist` });
+        return;
+      }
+
+      bcrypt
+        .compare(password, foundUser.password)
+        .then(verifiedStatus => {
+
+          if (verifiedStatus) {
+            req.session.user = foundUser;
+            res.redirect('/home');
+          } else {
+            res.status(200).render('auth/signin', { msg: 'The password is incorrect!' });
+          }
+
+        })
+        .catch((err) => {
+          console.error(`Error while comparing: ${err}`);
+          next();
+        })
+    })
+    .catch((err) => {
+      console.log(`Error finding: ${err}`);
       next(err);
-    });
+    })
+    
+});
+
+
+router.post('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
 });
 
 

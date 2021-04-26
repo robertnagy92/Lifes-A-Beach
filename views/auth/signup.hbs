@@ -1,13 +1,28 @@
+<section class="settings">
+  <h2>New here?</h2>
+  <h2>Sign up now!</h2>
 
-<h2>New here?</h2>
-<h3>Sign up </h3>
-<form action="/signup" method="POST">
-  <label>Email</label>
-  <input name="email" type="text"  placeholder="Enter your email"  >
+  <form action="/signup" method="post">
+   <label for="username">Username:</label>
+    <input type="text" name="username" placeholder="Enter username" >
+   <label for="password">Password:</label>
+    <input type="password" name="password" placeholder="Enter password" >
 
-  <label>Password</label>
-  <input name="password" type="password"  placeholder="Enter your Password"  >
-  <button>Sign Up</button>
-</form>
+    <button type="submit">Submit</button>
 
-<h3>-Or-</h3>
+  </form>
+
+  <br>
+  <a href="/">Go Back</a>
+
+  {{#if msg}}
+  
+  <p>{{msg}}</p> 
+
+  {{/if}}
+
+<h3>Or</h3>
+<a href="/auth/google">Google Login</a>
+</section>
+
+

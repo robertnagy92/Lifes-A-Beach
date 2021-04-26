@@ -1,2 +1,26 @@
-<h1>Welcome here's your profile, yay</h1>
-<button>Next</button>
+<div class="settings">
+  <br>
+<a href="/">Go back</a>
+<br>
+{{#if username}}
+<a href="/main">Main</a>
+<br>
+<a href="/private">Private</a>
+<h2>Welcome, {{ username }}!</h2>
+<p>This is your profile!</p>
+{{else}}
+<a href="/main">Main</a>
+<br>
+<a href="/private">Private</a>
+<h2>Welcome, {{ username}}!</h2>
+<p>This is your profile!</p>
+<p>Still no logged in user, sorry!</p>
+{{/if}}
+ 
+ <form action="/logout" method="POST">
+<button type="submit">Logout</button>
+ </form>
+ <h2>Create a trip</h2>
+
+<a href="/create">Create</a>
+</div>

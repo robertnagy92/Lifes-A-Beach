@@ -109,3 +109,7 @@ ul li {
   font-weight: bold;
   font-size: 2em;
 }
+.settings {
+  text-align: center;
+  align-items: center;
+}
