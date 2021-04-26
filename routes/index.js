@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const Trip = require("../models/Trip.model");
-//Do all our todo routes
 
-/* GET landing page */
+/**All Routes******/
+
+/* landing page */
 router.get("/", (req, res, next) => {
   res.render("index");
 });
@@ -26,7 +27,7 @@ router.post("/trips/create", (req, res, next) => {
 });
 
 //********Destination Page********* */
-//Get route to show destination page after create page
+//page after create page
 router.get("/destination/:id", (req, res) => {
   const { id } = req.params;
   res.render("trips/destination", { id });
@@ -34,21 +35,20 @@ router.get("/destination/:id", (req, res) => {
 
 //POST route for destination page
 router.post("/destination/:id", (req, res, next) => {
-  //get the id
+  //get the information for DB
   const { id } = req.params;
   const { destination } = req.body;
 
-  //go to the DB and edit the element
+  //go to the DB and update destination
   Trip.findByIdAndUpdate(id, { destination })
     .then((data) => {
-      console.log("destination choosen");
       res.redirect(`/budget/${data._id}`);
     })
     .catch((err) => console.log(err));
 });
 
-// //******budget page */
-// //Get route to show budget page after destinations page
+//******budget page ******/
+//Get route to show budget page after destinations page
 router.get("/budget/:id", (req, res) => {
   const { id } = req.params;
   res.render("trips/budget", { id });
@@ -56,23 +56,23 @@ router.get("/budget/:id", (req, res) => {
 
 //POST route for destination page
 router.post("/budget/:id", (req, res, next) => {
-  //get the id
+  //get the information for DB
   const { id } = req.params;
   const { budget } = req.body;
 
-  //go to the DB and edit the element
+  //Update budget in DB
   Trip.findByIdAndUpdate(id, { budget })
     .then((data) => {
-      console.log("budget logged");
       res.redirect(`/timeuntil/${data._id}`);
     })
     .catch((err) => console.log(err));
 });
 
-// //*****time until the user takes their trip page  */
+//********time until the trip page**********/
+//Route to show timeuntil trip page after destination page
 router.get("/timeuntil/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/timeuntil.hbs", { id });
+  res.render("trips/timeuntil", { id });
 });
 
 //POST route for timeuntil page
@@ -88,11 +88,11 @@ router.post("/timeuntil/:id", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
-// //******Length of trip page ********/
-// //Get route to show length of the vaction (1wk, 2wks. 3wks) after timeuntil page
+//******Length of trip page ********
+//Get route to show length of the vaction (1wk, 2wks. 3wks) after timeuntil page
 router.get("/length/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/length.hbs");
+  res.render("trips/length");
 });
 
 //POST route for length page
@@ -108,11 +108,10 @@ router.post("/length/:id", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
-// //Get route to show *******luxury****** page after length page
-// //will ask the user the level of luxury they want
+//Get route to show *******luxury****** page after length page
 router.get("/luxury/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/luxury.hbs");
+  res.render("trips/luxury");
 });
 
 //POST route for luxury page
@@ -128,14 +127,13 @@ router.post("/luxury/:id", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
-// //Get route to show ****** total ****** page after luxury page
-// //this page will show the user the est total cost of the trips
+//Get route to show ****** total ****** page after luxury page
 router.get("/total/:id", (req, res) => {
   const { id } = req.params;
   res.render("trips/total.hbs");
 });
 
-//POST route for total page
+//POST route to update total page
 router.post("/total/:id", (req, res, next) => {
   const { id } = req.params;
   const { total } = req.body;
@@ -148,9 +146,10 @@ router.post("/total/:id", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
-// //Get route to show pichart page after total page, breaking down the expensies
-// router.get("/piechart", (req, res) => {
-//   res.render("trips/piechart.hbs");
-// });
+//Get route to show pichart page after total page, breaking down the expensies
+router.get("/piechart/:id", (req, res) => {
+  const { id } = req.params;
+  res.render("trips/piechart.hbs");
+});
 
 module.exports = router;
