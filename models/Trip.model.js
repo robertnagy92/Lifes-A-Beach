@@ -22,7 +22,7 @@ const tripSchema = new Schema({
   },
 
   luxury: {
-    enum: ["deluxe", "basic", "budget"],
+    enum: ["Premium", "Basic", "Budget"],
   },
 
   owner: {
