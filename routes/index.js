@@ -1,5 +1,5 @@
 const router = require("express").Router();
-//const Trip = require("../models/Trip.model");
+
 /* GET landing page */
 router.get("/", (req, res, next) => {
   res.render("index");
@@ -41,8 +41,6 @@ router.post("/trips/create", (req, res, next) => {
     })
 
     .catch((err) => console.log(err));
-
-  //send the user to a new page
 });
 
 // //********Destination Page***** */
