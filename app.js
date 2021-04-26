@@ -18,6 +18,11 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require("./config")(app);
 
+//Passport config
+const passport = require('passport')
+require('./config/passport')(passport)
+
+
 // default value for title local
 const projectName = "LifesABeach";
 const capitalized = (string) =>
@@ -49,10 +54,19 @@ app.use(
 
 //By default it will create a  sessions collection in that DB
 
+//Passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 // 👇 Start handling routes here
 app.use("/", require("./routes/index"));
 
 app.use("/", require("./routes/auth.routes"));
+
+app.use("/auth", require("./routes/auth.routes"));
+
+
 
 const isUserLoggedIn = require("./middleware/index");
 app.use('/', isUserLoggedIn , require('./routes/user.routes'));
