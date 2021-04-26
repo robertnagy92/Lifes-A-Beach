@@ -78,7 +78,7 @@ router.get("/timeuntil/:id", (req, res) => {
 //POST route for timeuntil page
 router.post("/timeuntil/:id", (req, res, next) => {
   const { id } = req.params;
-  const { timeuntil } = req.params;
+  const { timeuntil } = req.body;
 
   //go to the DB and edit the element
   Trip.findByIdAndUpdate(id, { approxDate })
@@ -98,7 +98,7 @@ router.get("/length/:id", (req, res) => {
 //POST route for length page
 router.post("/length/:id", (req, res, next) => {
   const { id } = req.params;
-  const { length } = req.params;
+  const { length } = req.body;
 
   //update length of vacation in DB
   Trip.findByIdAndUpdate(id, { lengthInWeeks })
@@ -108,45 +108,45 @@ router.post("/length/:id", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
-// // //Get route to show *******luxury****** page after length page
-// // //will ask the user the level of luxury they want
-// router.get("/luxury", (req, res) => {
-//   res.render("trips/luxury.hbs");
-// });
-// // //POST route for luxury page
-// // router.post("/luxury/:id", (req, res, next) => {
-// //   //get the id
-// //   const { id } = req.params;
+// //Get route to show *******luxury****** page after length page
+// //will ask the user the level of luxury they want
+router.get("/luxury/:id", (req, res) => {
+  const { id } = req.params;
+  res.render("trips/luxury.hbs");
+});
 
-// //   //get body with the elements to be edited
-// //   const { username, password } = req.body;
-// //   //go to the DB and edit the element
-// //   Trip.findByIdAndUpdate(id, { luxury })
-// //     .then((data) => {
-// //       res.redirect("/total");
-// //     })
-// //     .catch((err) => console.log(err));
-// // });
+//POST route for luxury page
+router.post("/luxury/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { luxury } = req.body;
 
-// // //Get route to show ****** total ****** page after luxury page
-// // //this page will show the user the est total cost of the trips
-// router.get("/total", (req, res) => {
-//   res.render("trips/total.hbs");
-// });
-// // //POST route for total page
-// // router.post("/total/:id", (req, res, next) => {
-// //   //get the id
-// //   const { id } = req.params;
+  //update the luxury level in the DB
+  Trip.findByIdAndUpdate(id, { luxury })
+    .then((data) => {
+      res.redirect(`/total/${data._id}`);
+    })
+    .catch((err) => console.log(err));
+});
 
-// //   //get body with the elements to be edited
-// //   const { username, password } = req.body;
-// //   //go to the DB and edit the element
-// //   Trip.findByIdAndUpdate(id, { total })
-// //     .then((data) => {
-// //       res.redirect("/piechart");
-// //     })
-// //     .catch((err) => console.log(err));
-// // });
+// //Get route to show ****** total ****** page after luxury page
+// //this page will show the user the est total cost of the trips
+router.get("/total/:id", (req, res) => {
+  const { id } = req.params;
+  res.render("trips/total.hbs");
+});
+
+//POST route for total page
+router.post("/total/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { total } = req.body;
+
+  //update the total in the DB
+  Trip.findByIdAndUpdate(id, { total })
+    .then((data) => {
+      res.redirect(`/piechart/${data._id}`);
+    })
+    .catch((err) => console.log(err));
+});
 
 // //Get route to show pichart page after total page, breaking down the expensies
 // router.get("/piechart", (req, res) => {

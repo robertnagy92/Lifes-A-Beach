@@ -1,12 +1,13 @@
 <h2>How long of a vacation would you like to plan?</h2>
 
-<label for="length">Choose how many weeks you will be on vacation:</label>
+<form action="/length/{{id}}" method="POST">
+<label for="lengthInWeeks">How long of a vacation do you want?</label>
 
 <select name="lengthInWeeks" id="lengthInWeeks">
-  <option value="1week">1 Week</option>
-  <option value="2Weeks">2 Weeks</option>
-  <option value="3Weeks">3 Weeks</option>
-  <option value="4Weeks">4 Weeks</option>
+  <option value="1">1 Week</option>
+  <option value="2">2 Weeks</option>
+  <option value="3">3 Weeks</option>
 </select>
 
-<button>Next</button>
+<button>Select</button>
+</form>
