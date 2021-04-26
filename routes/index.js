@@ -78,11 +78,12 @@ router.get("/timeuntil/:id", (req, res) => {
 //POST route for timeuntil page
 router.post("/timeuntil/:id", (req, res, next) => {
   const { id } = req.params;
-  const { timeuntil } = req.body;
+  const { approxDate } = req.body;
 
   //go to the DB and edit the element
   Trip.findByIdAndUpdate(id, { approxDate })
     .then((data) => {
+      console.log(" date added");
       res.redirect(`/length/${data._id}`);
     })
     .catch((err) => console.log(err));
@@ -92,13 +93,13 @@ router.post("/timeuntil/:id", (req, res, next) => {
 //Get route to show length of the vaction (1wk, 2wks. 3wks) after timeuntil page
 router.get("/length/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/length");
+  res.render("trips/length", { id });
 });
 
 //POST route for length page
 router.post("/length/:id", (req, res, next) => {
   const { id } = req.params;
-  const { length } = req.body;
+  const { lengthInWeeks } = req.body;
 
   //update length of vacation in DB
   Trip.findByIdAndUpdate(id, { lengthInWeeks })
@@ -111,7 +112,7 @@ router.post("/length/:id", (req, res, next) => {
 //Get route to show *******luxury****** page after length page
 router.get("/luxury/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/luxury");
+  res.render("trips/luxury", { id });
 });
 
 //POST route for luxury page
@@ -130,7 +131,7 @@ router.post("/luxury/:id", (req, res, next) => {
 //Get route to show ****** total ****** page after luxury page
 router.get("/total/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/total.hbs");
+  res.render("trips/total.hbs", { id });
 });
 
 //POST route to update total page
@@ -149,7 +150,19 @@ router.post("/total/:id", (req, res, next) => {
 //Get route to show pichart page after total page, breaking down the expensies
 router.get("/piechart/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/piechart.hbs");
+  res.render("trips/piechart.hbs", { id });
+});
+//POST route to update total page
+router.post("/piechart/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { total } = req.body;
+
+  //update the total in the DB
+  Trip.findByIdAndUpdate(id, { total })
+    .then((data) => {
+      res.redirect(`/home`);
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
