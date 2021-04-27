@@ -1,4 +1,8 @@
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -7,11 +11,19 @@ a {
   color: #00b7ff;
 }
 
-h1 {
-  color: 15px;
+.green {
+  color: green;
+  font-size: 50px;
+  font-weight: bold;
 }
+
+.welcome {
+  margin-top: -100px;
+  font-size: 60px;
+}
+
 body {
-  padding: 50px;
+  padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -55,7 +67,7 @@ form button {
   padding: 8px 16px;
   text-decoration: none;
   text-transform: uppercase;
-  transition: 0.3s ease ;
+  transition: 0.3s ease;
   width: 100%;
 }
 
