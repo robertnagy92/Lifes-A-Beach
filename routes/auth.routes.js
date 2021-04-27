@@ -3,6 +3,7 @@ const passport = require('passport')
 const bcrypt = require("bcryptjs");
 const User = require("../models/User.model")
 const authorize = require("../middleware/index")
+const Trip = require("../models/Trip.model")
 
 
 //Auth with Google
@@ -66,8 +67,10 @@ router.post('/signup', (req, res, next) => {
   })
 });
 router.get('/home', authorize, (req, res) => {
-  const { user } = req.session.user;
-  res.status(200).render("auth/home", {user});
+  const { user } = req.session;
+  Trip.find({ owner: user._id }).then((data) => {
+    res.render("auth/home", { user, data });
+  });
 });
 
 router.get('/signin', (_, res) => {
