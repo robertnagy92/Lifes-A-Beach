@@ -5,32 +5,35 @@ body {
   flex-direction: column;
   padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgb(221, 218, 198);
 }
 
 a {
   color: #00b7ff;
 }
 
+h2 {
+  color: rgb(53, 194, 255);
+  font-size: 50px;
+  text-shadow: 4px 4px 2px black;
+}
+
 h3 {
   margin: 5px;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 25px;
+}
+
+.name {
+  font-size: 40px;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .green {
   color: green;
   font-size: 50px;
   font-weight: bold;
-}
-
-.welcome {
-  margin-top: -100px;
-  font-size: 60px;
-}
-
-body {
-  padding: 20px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -78,7 +81,7 @@ form button {
 }
 
 form button:hover {
-  background: #fff;
+  background: rgb(10, 30, 208);
   color: #43a3e6;
   transition: 0.3s ease;
 }
@@ -130,4 +133,50 @@ ul li {
 .settings {
   text-align: center;
   align-items: center;
+}
+
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+  color: rgb(2, 149, 202);
+  text-shadow: 8px 8px 3px black;
+  margin-top: -30px;
+}
+
+.logo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: -20px;
+}
+
+#back {
+  position: relative;
+  left: -450px;
+}
+#delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 130px;
+  width: 100px;
+  font-size: 15px;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px black;
+}
+
+.logout {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 130px;
+  width: 100px;
+  font-size: 15px;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px black;
 }
