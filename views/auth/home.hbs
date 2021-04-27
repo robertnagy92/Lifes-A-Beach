@@ -2,15 +2,16 @@
   <a href="/">Go back</a>
 </div>
 
-<div class="settings">
-  <h1 class="welcome">Welcome, {{ user.username }}!</h1>
+<h1 class="welcome">Welcome, {{ user.username }}!</h1>
+
+<div class="createATrip">
   <h2>Create a trip</h2>  
-  <a href="/create">Create</a>
+  <a class="create" href="/create">Create</a>
  </div>
 
 <h2>Here is a list of your current trips:</h2>
 {{#each data}}
-  <h3>Trip Name:<h3>{{name}}</h3></h3>
+  <h3><b>Trip Name:</b>  {{name}}</h3>
   <form action="/home" method="POST">
    <button id="delete" >Delete</button>
   </form>
