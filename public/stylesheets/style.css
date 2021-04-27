@@ -3,12 +3,18 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00b7ff;
+}
+
+h3 {
+  margin: 5px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 30px;
 }
 
 .green {

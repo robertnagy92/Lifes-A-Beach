@@ -217,19 +217,17 @@ router.post("/piechart/:id", (req, res, next) => {
 });
 
 //*********Delete Route*********
-// // Delete one of the trips planned
-// router.post("/trips/:id/delete", (req, res, next) => {
-//   //recieve id from user
-//   const { id } = req.params;
-
-//   //delete he element fromt he DB
-//   Trip.findByIdAndDelete(id)
-//     .then((data) => {
-//       res.redirect("/home");
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+// Delete one of the trips planned
+router.post("/home", (req, res, next) => {
+  const { id } = req.params;
+  //delete he element fromt he DB
+  Trip.findByIdAndDelete(id)
+    .then((data) => {
+      res.redirect("/home");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 module.exports = router;

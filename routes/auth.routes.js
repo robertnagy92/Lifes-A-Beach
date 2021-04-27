@@ -71,7 +71,6 @@ router.get("/home", (req, res) => {
   console.log(req.session.user);
   const { user } = req.session;
   Trip.find({ owner: user._id }).then((data) => {
-    console.log(data);
     res.render("auth/home", { user, data });
   });
 });
