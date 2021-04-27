@@ -3,13 +3,17 @@
 <div class="settings">
   <br>
 <a href="/">Go back</a>
-<br>
-{{#if username}}
-<a href="/main">Main</a>
-<br>
-<a href="/private">Private</a>
-<h2>Welcome, {{ username }}!</h2>
-<p>This is your profile!</p>
+
+<h1>Welcome, {{ username }}!</h1>
+
+<h2>Here is a list of your current trips:</h2>
+{{#each Trips}}
+<h3>{{this.name}}</h3>
+<form action="/home/{{id}}" method="POST">
+<button>Delete</button>
+</form>
+{{/each}}
+
 {{else}}
 <a href="/main">Main</a>
 <br>

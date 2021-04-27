@@ -20,7 +20,6 @@ router.post("/trips/create", (req, res, next) => {
   //use that information to create a new element in our database
   Trip.create({ name })
     .then((data) => {
-      console.log("trip create");
       res.redirect(`/destination/${data._id}`);
     })
     .catch((err) => res.render("../public/images/404.jpeg"));
@@ -94,61 +93,12 @@ router.post("/timeuntil/:id", (req, res, next) => {
   //go to the DB and edit the element
   Trip.findByIdAndUpdate(id, { approxDate })
     .then((data) => {
-      console.log(" date added");
-      res.redirect(`/length/${data._id}`);
+      res.redirect(`/luxury/${data._id}`);
     })
     .catch((err) => console.log(err));
 });
 
-//******Length of trip page ********
-//Get route to show length of the vaction (1wk, 2wks. 3wks) after timeuntil page
-router.get("/length/:id", (req, res) => {
-  const { id } = req.params;
-  res.render("trips/length", { id });
-});
-
-//POST route for length page
-router.post("/length/:id", (req, res, next) => {
-  const { id } = req.params;
-  const { lengthInWeeks } = req.body;
-
-  //find Id for trip, one week stay at each destination multiplied by how long the vacation is
-  Trip.findById(id)
-    .then((trip) => {
-      let total = trip.total;
-      let destination = trip.destination;
-      let oneWeek = 0;
-      let hotelCost = 0;
-      if (destination == "Honolulu") {
-        oneWeek = 500;
-      } else if (destination == "Tahiti") {
-        oneWeek = 500;
-      } else if (destination == "Bali") {
-        oneWeek = 500;
-      } else if (destination == "Australia") {
-        oneWeek = 500;
-      } else if (destination == "California") {
-        oneWeek = 500;
-      } else if (destination == "Mexico") {
-        oneWeek = 500;
-      }
-      hotelCost = oneWeek * lengthInWeeks;
-      total += hotelCost;
-      console.log(total, hotelCost);
-      //update length of vacation in DB the length of the vacation and the total cost of it
-      Trip.findByIdAndUpdate(id, { lengthInWeeks, total })
-        .then((data) => {
-          res.redirect(`/luxury/${data._id}`);
-        })
-        .catch((err) => console.log(err));
-    })
-
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-//Get route to show *******luxury****** page after length page
+//Get route to show *******luxury****** page after time until page
 router.get("/luxury/:id", (req, res) => {
   const { id } = req.params;
   res.render("trips/luxury", { id });
@@ -162,42 +112,104 @@ router.post("/luxury/:id", (req, res, next) => {
   //update the luxury level in the DB
   Trip.findByIdAndUpdate(id, { luxury })
     .then((data) => {
-      res.redirect(`/total/${data._id}`);
+      res.redirect(`/length/${data._id}`);
     })
     .catch((err) => console.log(err));
+});
+
+//******Length of trip page ********
+//Get route to show length of the vaction (1wk, 2wks. 3wks) after luxury page
+router.get("/length/:id", (req, res) => {
+  const { id } = req.params;
+  res.render("trips/length", { id });
+});
+
+//POST route for length page
+router.post("/length/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { lengthInWeeks } = req.body;
+
+  //find Id for trip, one week stay at each destination multiplied by how long the vacation is
+  Trip.findById(id)
+    .then((trip) => {
+      //all info from the DB, so we can display on the total page
+      let total = trip.total;
+      let destination = trip.destination;
+      let lux = trip.luxury;
+      let weeksUntilTrip = Math.ceil(
+        (trip.approxDate - new Date()) / 1000 / 60 / 60 / 24 / 7
+      );
+      let saveEach = trip.saveEach;
+      let oneWeek = 0;
+      let hotelCost = 0;
+      if (destination == "Honolulu") {
+        oneWeek = 1000;
+      } else if (destination == "Tahiti") {
+        oneWeek = 1200;
+      } else if (destination == "Bali") {
+        oneWeek = 800;
+      } else if (destination == "Australia") {
+        oneWeek = 1000;
+      } else if (destination == "California") {
+        oneWeek = 1000;
+      } else if (destination == "Mexico") {
+        oneWeek = 600;
+      }
+      //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
+      hotelCost = oneWeek * lux * lengthInWeeks;
+      total += hotelCost;
+      saveEach = total / weeksUntilTrip;
+      console.log(total, saveEach);
+      //update length of vacation in DB the length of the vacation and the total cost of it
+      Trip.findByIdAndUpdate(id, { lengthInWeeks, total, saveEach })
+        .then((data) => {
+          res.redirect(`/total/${data._id}`);
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 //Get route to show ****** total ****** page after luxury page
 router.get("/total/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/total.hbs", { id });
+  Trip.findById(id).then((trip) => {
+    const { total, saveEach } = req.body;
+    res.render("trips/total.hbs", {
+      id,
+      total: trip.total,
+      saveEach: trip.saveEach,
+    });
+  });
 });
 
 //POST route to update total page
 router.post("/total/:id", (req, res, next) => {
   const { id } = req.params;
-  const { total } = req.body;
-
-  //update the total in the DB
-  Trip.findByIdAndUpdate(id, { total })
-    .then((data) => {
-      res.redirect(`/piechart/${data._id}`);
-    })
-    .catch((err) => console.log(err));
+  const { total, saveEach } = req.body;
+  //Updating the total and how much to save every month variable
+  Trip.findById(id).then((trip) => {
+    //update the total in the DB
+    Trip.findByIdAndUpdate(id, { total })
+      .then((data) => {
+        res.redirect(`/piechart/${data._id}`);
+      })
+      .catch((err) => console.log(err));
+  });
 });
 
-//Get route to show pichart page after total page, breaking down the expensies
+//Get route to show pichart page after total page, breaking down the expenses
 router.get("/piechart/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/piechart.hbs", { id });
+  res.render("trips/piechart", { id });
 });
 //POST route to update total page
 router.post("/piechart/:id", (req, res, next) => {
   const { id } = req.params;
-  const { total } = req.body;
-
-  //update the total in the DB
-  Trip.findByIdAndUpdate(id, { total })
+  const { total, destination, luxury } = req.body;
+  Trip.findById(id)
     .then((data) => {
       res.redirect(`/home`);
     })

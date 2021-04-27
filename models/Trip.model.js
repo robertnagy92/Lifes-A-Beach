@@ -30,6 +30,10 @@ const tripSchema = new Schema({
     default: 0,
   },
 
+  saveEach: {
+    type: Number,
+  },
+
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User",

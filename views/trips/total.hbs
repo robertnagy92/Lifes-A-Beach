@@ -1,13 +1,15 @@
-<h1>Total estimated cost of your trip...</h1>
+<h1>Ok, the estimated total cost of your trip is...</h1>
 
-<h1>$$$</h1>
+<h1>${{total}}</h1>
 
-<h2>You will need to save this amount every month...</h2>
 
-<h2>$$$</h2>
+<h2>And to be able to pay for it</h2>
+<h2>You will need to save every week...</h2>
+
+<h1>${{saveEach}}</h1>
 
 <form action="/total/{{id}}" method="POST">
-<button><a href="./piechart.hbs">Next</a></button>
+<button>Next</button>
 </form>
 
 
