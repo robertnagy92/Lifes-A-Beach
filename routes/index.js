@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Trip = require("../models/Trip.model");
 
+
 /**All Routes******/
 
 /* landing page */
@@ -11,7 +12,7 @@ router.get("/", (req, res, next) => {
 //****Create a trip page***** */
 //POST route for *create* page
 router.get("/create", (req, res) => {
-  res.render("trips/create");
+    res.render("trips/create")
 });
 router.post("/trips/create", (req, res, next) => {
   //check info being sent from user

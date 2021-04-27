@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const Google = require("../models/Google.model.js");
 const User = require("../models/User.model");
+const authorize = require("../middleware/index");
 const Trip = require("../models/Trip.model");
 
 //Auth with Google
@@ -12,7 +12,7 @@ router.get(
   "/google/callback/",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("/home");
+    res.render("auth/home");
   }
 );
 
@@ -67,8 +67,7 @@ router.post("/signup", (req, res, next) => {
       console.error(`Error while creating new user: ${err}`);
     });
 });
-router.get("/home", (req, res) => {
-  console.log(req.session.user);
+router.get("/home", authorize, (req, res) => {
   const { user } = req.session;
   Trip.find({ owner: user._id }).then((data) => {
     res.render("auth/home", { user, data });
