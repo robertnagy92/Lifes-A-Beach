@@ -1,23 +1,12 @@
 
-<img src="../public/images/pngjoy.com_superman-clipart-pixel-art-superman-hd-png-download_9435808.png">
 <div class="settings">
   <br>
 <a href="/">Go back</a>
 <br>
-{{#if username}}
-<a href="/main">Main</a>
-<br>
-<a href="/private">Private</a>
-<h2>Welcome, {{ username }}!</h2>
-<p>This is your profile!</p>
-{{else}}
-<a href="/main">Main</a>
-<br>
-<a href="/private">Private</a>
-<h2>Welcome, {{ username}}!</h2>
-<p>This is your profile!</p>
-<p>Still no logged in user, sorry!</p>
-{{/if}}
+<h1>Welcome, {{ username }}!</h1>
+
+<h2>Here is a list of your current trips:</h2>
+
  
  <form action="/logout" method="POST">
 <button type="submit">Logout</button>
