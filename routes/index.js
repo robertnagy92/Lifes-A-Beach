@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const Trip = require("../models/Trip.model");
 
-
 /**All Routes******/
 
 /* landing page */
@@ -12,7 +11,7 @@ router.get("/", (req, res, next) => {
 //****Create a trip page***** */
 //POST route for *create* page
 router.get("/create", (req, res) => {
-    res.render("trips/create")
+  res.render("trips/create");
 });
 router.post("/trips/create", (req, res, next) => {
   //check info being sent from user
@@ -39,17 +38,17 @@ router.post("/destination/:id", (req, res, next) => {
   const { destination } = req.body;
   let total = 0;
   if (destination == "Honolulu") {
-    total += 1000;
+    total += 1300;
   } else if (destination == "Tahiti") {
-    total += 1500;
+    total += 1200;
   } else if (destination == "Bali") {
-    total += 2000;
+    total += 800;
   } else if (destination == "Australia") {
     total += 2000;
   } else if (destination == "California") {
-    total += 1200;
+    total += 700;
   } else if (destination == "Mexico") {
-    total += 1400;
+    total += 800;
   }
   //go to the DB and update destination
   Trip.findByIdAndUpdate(id, { destination, total })
@@ -219,7 +218,7 @@ router.post("/piechart/:id", (req, res, next) => {
 
 //*********Delete Route*********
 // Delete one of the trips planned
-router.post("/home", (req, res, next) => {
+router.post("/home/:id/delete", (req, res, next) => {
   const { id } = req.params;
   //delete he element fromt he DB
   Trip.findByIdAndDelete(id)
@@ -227,7 +226,7 @@ router.post("/home", (req, res, next) => {
       res.redirect("/home");
     })
     .catch((err) => {
-      console.log(err);
+      res.render("views/error.hbs");
     });
 });
 

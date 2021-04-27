@@ -5,27 +5,29 @@ body {
   flex-direction: column;
   padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: rgb(221, 218, 198);
+  background-color: rgb(236, 219, 187);
 }
 
 .create {
-  padding: 10px;
-  font-size: 40px;
+  padding: 5px 40px 5px 40px;
+  font-size: 50px;
   border: 2px solid black;
-  box-shadow: 4px 4px 2px black;
+  box-shadow: -4px -4px 2px black;
   background-color: blue;
   color: #fff;
   border-radius: 10px;
-  margin-bottom: 50px;
+  margin-top: -50px;
 }
 a {
   color: #00b7ff;
 }
 
 h2 {
-  color: rgb(53, 194, 255);
-  font-size: 50px;
-  text-shadow: 4px 4px 2px black;
+  color: rgb(4, 68, 206);
+  font-size: 75px;
+  text-shadow: -3px -3px 2px black;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bolder;
 }
 
 h3 {
@@ -59,7 +61,7 @@ form {
 }
 
 form label {
-  color: #666;
+  color: rgb(44, 42, 42);
   display: inline-block;
   margin-bottom: 10px;
   text-align: center;
@@ -82,7 +84,6 @@ form button {
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  display: inline-block;
   font-size: 14px;
   padding: 8px 16px;
   text-decoration: none;
@@ -92,7 +93,7 @@ form button {
 }
 
 form button:hover {
-  background: rgb(10, 30, 208);
+  background: rgb(36, 54, 221);
   color: #43a3e6;
   transition: 0.3s ease;
 }
@@ -147,25 +148,32 @@ ul li {
 }
 
 .createATrip {
+  display: flex;
   text-align: center;
   align-items: center;
-  margin-bottom: 80px;
-  border: 3px solid rgb(78, 78, 80);
-  background-color: rgb(168, 166, 163);
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-bottom: 50px;
+  border: 3px solid rgb(68, 68, 71);
+  background-color: rgba(153, 186, 194, 0.365);
   border-radius: 30px;
-  box-shadow: 4px 4px 2px black;
+  box-shadow: -4px -4px 5px black;
   width: 600px;
   height: 250px;
+}
+.createATrip h2 {
+  margin-top: 20px;
 }
 
 .welcome {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 80px;
-  color: rgb(2, 149, 202);
-  text-shadow: 8px 8px 3px black;
-  margin-top: -30px;
+  color: rgb(4, 68, 206);
+  font-size: 90px;
+  text-shadow: -3px -3px 2px black;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bolder;
 }
 
 .logo {
@@ -188,18 +196,36 @@ ul li {
   font-size: 15px;
   color: white;
   border-radius: 10px;
-  box-shadow: 4px 4px 8px black;
+  box-shadow: -4px -4px 8px black;
 }
 
-.logout {
-  width: 300px;
+#logout {
+  width: 100%;
+}
+
+#logout button {
+  margin-left: -300px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 130px;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 100px;
   font-size: 15px;
   color: white;
   border-radius: 10px;
-  box-shadow: 4px 4px 8px black;
+  box-shadow: -4px -4px 8px black;
+}
+
+.page {
+  background-color: rgb(220, 234, 238);
+  margin: 10px;
+  width: 98%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: -6px -6px 4px black;
+}
+
+.error {
+  size: 100%;
 }
