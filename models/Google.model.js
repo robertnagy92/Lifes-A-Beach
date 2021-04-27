@@ -17,13 +17,6 @@ const googleSchema = new Schema({
     type: String,
     require: true
   },
-  // username: {
-  //   type: String,
-  //   unique: true,
-  // },
-  // password: {
-  //   type: String
-  // },
   image: {
     type: String
   },
