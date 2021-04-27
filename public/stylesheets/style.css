@@ -1,4 +1,8 @@
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -7,8 +11,10 @@ a {
   color: #00b7ff;
 }
 
-h1 {
-  color: 15px;
+.green {
+  color: green;
+  font-size: 50px;
+  font-weight: bold;
 }
 
 .welcome {
@@ -17,7 +23,7 @@ h1 {
 }
 
 body {
-  padding: 50px;
+  padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 

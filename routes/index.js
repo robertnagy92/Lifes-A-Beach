@@ -16,9 +16,9 @@ router.get("/create", (req, res) => {
 router.post("/trips/create", (req, res, next) => {
   //check info being sent from user
   const { name } = req.body;
-
+  const { user } = req.session;
   //use that information to create a new element in our database
-  Trip.create({ name })
+  Trip.create({ name, owner: user._id })
     .then((data) => {
       res.redirect(`/destination/${data._id}`);
     })
@@ -158,8 +158,8 @@ router.post("/length/:id", (req, res, next) => {
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
       hotelCost = oneWeek * lux * lengthInWeeks;
       total += hotelCost;
-      saveEach = total / weeksUntilTrip;
-      console.log(total, saveEach);
+      saveEach = Math.floor(total / weeksUntilTrip);
+
       //update length of vacation in DB the length of the vacation and the total cost of it
       Trip.findByIdAndUpdate(id, { lengthInWeeks, total, saveEach })
         .then((data) => {
@@ -215,5 +215,21 @@ router.post("/piechart/:id", (req, res, next) => {
     })
     .catch((err) => console.log(err));
 });
+
+//*********Delete Route*********
+// // Delete one of the trips planned
+// router.post("/trips/:id/delete", (req, res, next) => {
+//   //recieve id from user
+//   const { id } = req.params;
+
+//   //delete he element fromt he DB
+//   Trip.findByIdAndDelete(id)
+//     .then((data) => {
+//       res.redirect("/home");
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 
 module.exports = router;

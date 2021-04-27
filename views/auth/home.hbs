@@ -4,29 +4,20 @@
   <br>
 <a href="/">Go back</a>
 
-<h1>Welcome, {{ username }}!</h1>
+<h1>Welcome, {{ user.username }}!</h1>
 
 <h2>Here is a list of your current trips:</h2>
-{{#each Trips}}
-<h3>{{this.name}}</h3>
+{{#each data}}
+<h3>{{name}}</h3>
 <form action="/home/{{id}}" method="POST">
 <button>Delete</button>
 </form>
 {{/each}}
 
-{{else}}
-<a href="/main">Main</a>
-<br>
-<a href="/private">Private</a>
-<h2>Welcome, {{ username}}!</h2>
-<p>This is your profile!</p>
-<p>Still no logged in user, sorry!</p>
-{{/if}}
- 
  <form action="/logout" method="POST">
-<button type="submit">Logout</button>
+ <button type="submit">Logout</button>
  </form>
- <h2>Create a trip</h2>
 
-<a href="/create">Create</a>
-</div>
+ <h2>Create a trip</h2>  
+ <a href="/create">Create</a>
+ </div>
