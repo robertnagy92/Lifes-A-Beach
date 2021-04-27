@@ -23,7 +23,7 @@ router.post("/trips/create", (req, res, next) => {
       console.log("trip create");
       res.redirect(`/destination/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.render("../public/images/404.jpeg"));
 });
 
 //********Destination Page********* */
@@ -32,15 +32,27 @@ router.get("/destination/:id", (req, res) => {
   const { id } = req.params;
   res.render("trips/destination", { id });
 });
-
 //POST route for destination page
 router.post("/destination/:id", (req, res, next) => {
   //get the information for DB
   const { id } = req.params;
   const { destination } = req.body;
-
+  let total = 0;
+  if (destination == "Honolulu") {
+    total += 1000;
+  } else if (destination == "Tahiti") {
+    total += 1500;
+  } else if (destination == "Bali") {
+    total += 2000;
+  } else if (destination == "Australia") {
+    total += 2000;
+  } else if (destination == "California") {
+    total += 1200;
+  } else if (destination == "Mexico") {
+    total += 1400;
+  }
   //go to the DB and update destination
-  Trip.findByIdAndUpdate(id, { destination })
+  Trip.findByIdAndUpdate(id, { destination, total })
     .then((data) => {
       res.redirect(`/budget/${data._id}`);
     })
@@ -53,7 +65,6 @@ router.get("/budget/:id", (req, res) => {
   const { id } = req.params;
   res.render("trips/budget", { id });
 });
-
 //POST route for destination page
 router.post("/budget/:id", (req, res, next) => {
   //get the information for DB
@@ -101,12 +112,40 @@ router.post("/length/:id", (req, res, next) => {
   const { id } = req.params;
   const { lengthInWeeks } = req.body;
 
-  //update length of vacation in DB
-  Trip.findByIdAndUpdate(id, { lengthInWeeks })
-    .then((data) => {
-      res.redirect(`/luxury/${data._id}`);
+  //find Id for trip, one week stay at each destination multiplied by how long the vacation is
+  Trip.findById(id)
+    .then((trip) => {
+      let total = trip.total;
+      let destination = trip.destination;
+      let oneWeek = 0;
+      let hotelCost = 0;
+      if (destination == "Honolulu") {
+        oneWeek = 500;
+      } else if (destination == "Tahiti") {
+        oneWeek = 500;
+      } else if (destination == "Bali") {
+        oneWeek = 500;
+      } else if (destination == "Australia") {
+        oneWeek = 500;
+      } else if (destination == "California") {
+        oneWeek = 500;
+      } else if (destination == "Mexico") {
+        oneWeek = 500;
+      }
+      hotelCost = oneWeek * lengthInWeeks;
+      total += hotelCost;
+      console.log(total, hotelCost);
+      //update length of vacation in DB the length of the vacation and the total cost of it
+      Trip.findByIdAndUpdate(id, { lengthInWeeks, total })
+        .then((data) => {
+          res.redirect(`/luxury/${data._id}`);
+        })
+        .catch((err) => console.log(err));
     })
-    .catch((err) => console.log(err));
+
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 //Get route to show *******luxury****** page after length page
