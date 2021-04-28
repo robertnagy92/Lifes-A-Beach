@@ -18,7 +18,7 @@
   <h2>Your current trips:</h2>
   {{#each data}}
     <h3>Trip Name:  {{name}}</h3>
-    <form action="/home/{{data._id}}/delete" method="POST">
+    <form action="/home/{{id}}/delete" method="POST">
   <button>Delete</button>
 </form>
   {{/each}}
