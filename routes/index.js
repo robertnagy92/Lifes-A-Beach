@@ -22,7 +22,7 @@ router.post("/trips/create", (req, res, next) => {
     .then((data) => {
       res.redirect(`/destination/${data._id}`);
     })
-    .catch((err) => res.render("../public/images/404.jpeg"));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //********Destination Page********* */
@@ -55,7 +55,7 @@ router.post("/destination/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/budget/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //******budget page ******/
@@ -75,7 +75,7 @@ router.post("/budget/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/timeuntil/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //********time until the trip page**********/
@@ -95,7 +95,7 @@ router.post("/timeuntil/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/luxury/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //Get route to show *******luxury****** page after time until page
@@ -114,7 +114,7 @@ router.post("/luxury/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/length/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //******Length of trip page ********
@@ -165,10 +165,10 @@ router.post("/length/:id", (req, res, next) => {
         .then((data) => {
           res.redirect(`/total/${data._id}`);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => res.redirect("../views/error.hbs"));
     })
     .catch((err) => {
-      console.log(err);
+      res.redirect("../views/error.hbs");
     });
 });
 
@@ -196,7 +196,7 @@ router.post("/total/:id", (req, res, next) => {
       .then((data) => {
         res.redirect(`/piechart/${data._id}`);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => res.redirect("../views/error.hbs"));
   });
 });
 
@@ -213,7 +213,7 @@ router.post("/piechart/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/home`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //*********Delete Route*********
@@ -226,7 +226,7 @@ router.post("/home/:id/delete", (req, res, next) => {
       res.redirect("/home");
     })
     .catch((err) => {
-      res.render("views/error.hbs");
+      res.redirect("../views/error.hbs");
     });
 });
 
