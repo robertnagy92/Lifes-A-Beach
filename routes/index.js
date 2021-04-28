@@ -36,7 +36,7 @@ router.post("/trips/create", (req, res, next) => {
     .then((data) => {
       res.redirect(`/destination/${data._id}`);
     })
-    .catch((err) => res.redirect("../views/error.hbs"));
+    .catch((err) => res.redirect("/total"));
 });
 
 //********Destination Page********* */
