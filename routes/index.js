@@ -42,9 +42,9 @@ router.post("/destination/:id", (req, res, next) => {
   } else if (destination == "Tahiti") {
     total += 1200;
   } else if (destination == "Bali") {
-    total += 800;
+    total += 600;
   } else if (destination == "Australia") {
-    total += 2000;
+    total += 400;
   } else if (destination == "California") {
     total += 700;
   } else if (destination == "Mexico") {
@@ -143,7 +143,7 @@ router.post("/length/:id", (req, res, next) => {
       let oneWeek = 0;
       let hotelCost = 0;
       if (destination == "Honolulu") {
-        oneWeek = 1000;
+        oneWeek = 300;
       } else if (destination == "Tahiti") {
         oneWeek = 1200;
       } else if (destination == "Bali") {
@@ -151,9 +151,9 @@ router.post("/length/:id", (req, res, next) => {
       } else if (destination == "Australia") {
         oneWeek = 1000;
       } else if (destination == "California") {
-        oneWeek = 1000;
+        oneWeek = 900;
       } else if (destination == "Mexico") {
-        oneWeek = 600;
+        oneWeek = 550;
       }
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
       hotelCost = oneWeek * lux * lengthInWeeks;
