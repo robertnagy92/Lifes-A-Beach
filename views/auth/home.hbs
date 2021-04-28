@@ -1,13 +1,13 @@
 
-<div class="settings">
+<div class="settings homeTop">
   <br>
 <a href="/">Go back</a>
 
-<h1>Welcome, {{ user.username }}!</h1>
+<h1 class="welcome2">Welcome, {{ user.username }}!</h1>
 
-<h2>Here is a list of your current trips:</h2>
+<h2 class="welcome2">Here is a list of your current trips:</h2>
 {{#each data}}
-<h3>{{name}}</h3>
+<h3 class="welcome2">{{name}}</h3>
 <form action="/home/{{id}}" method="POST">
 <button>Delete</button>
 </form>
