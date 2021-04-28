@@ -8,6 +8,20 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
+//*********(D)elete Routes*********
+router.post("/home/:id/delete", (req, res, next) => {
+  //recieve id from user
+  const { id } = req.params;
+  //delete he element fromt he DB
+  Trip.findByIdAndDelete(id)
+    .then((data) => {
+      res.redirect("/home");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 //****Create a trip page***** */
 //POST route for *create* page
 router.get("/create", (req, res) => {
@@ -176,11 +190,12 @@ router.post("/length/:id", (req, res, next) => {
 router.get("/total/:id", (req, res) => {
   const { id } = req.params;
   Trip.findById(id).then((trip) => {
-    const { total, saveEach } = req.body;
     res.render("trips/total.hbs", {
       id,
       total: trip.total,
       saveEach: trip.saveEach,
+      budget: trip.budget,
+      possible: trip.total < trip.budget,
     });
   });
 });
@@ -188,7 +203,7 @@ router.get("/total/:id", (req, res) => {
 //POST route to update total page
 router.post("/total/:id", (req, res, next) => {
   const { id } = req.params;
-  const { total, saveEach } = req.body;
+  const { total, saveEach, budget } = req.body;
   //Updating the total and how much to save every month variable
   Trip.findById(id).then((trip) => {
     //update the total in the DB
