@@ -8,20 +8,6 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
-//*********Delete Route*********
-// Delete one of the trips in the DB
-router.post("/home/:id/delete", (req, res, next) => {
-  const { id } = req.params;
-  //delete he element fromt he DB
-  Trip.findByIdAndDelete(id)
-    .then((data) => {
-      res.redirect("/home");
-    })
-    .catch((err) => {
-      res.redirect("../views/error.hbs");
-    });
-});
-
 //****Create a trip page***** */
 //POST route for *create* page
 router.get("/create", (req, res) => {

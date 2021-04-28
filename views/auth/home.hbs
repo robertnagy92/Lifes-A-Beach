@@ -1,27 +1,27 @@
  
- 
- <div class="page">
-  
-  <div id="logout">
+ <div id="logout">
     <form action="/logout" method="POST">
       <button type="submit">Logout</button>
     </form>
   </div>
+
+ <div class="settings">
   
   <h1 class="welcome">Welcome {{ user.username }}!</h1>
-
-  <div class="createATrip">
-    <h2>Create a trip</h2>  
-    <a class="create" href="/create">Start</a>
+  <div class="createTrip">
+  <h2>Create a trip</h2>  
+  <a class="create" href="/create">Start</a>
   </div>
 
+<div class="current">
   <h2>Your current trips:</h2>
   {{#each data}}
-    <h3>Trip Name:  {{name}}</h3>
+    <h3>Trip Name: <a href="/piechart/{{id}}">{{name}}</a></h3>
     <form action="/home/{{id}}/delete" method="POST">
   <button>Delete</button>
 </form>
   {{/each}}
+</div>
 </div>
 
 

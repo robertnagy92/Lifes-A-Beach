@@ -5,7 +5,24 @@ body {
   flex-direction: column;
   padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: rgb(236, 219, 187);
+  background-color: rgb(250, 232, 199);
+}
+
+.welcome {
+  color: rgb(82, 81, 80);
+  font-size: 90px;
+  text-shadow: -3px -3px 2px black;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bolder;
+  margin-top: -50px;
+}
+
+.settings {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .create {
@@ -16,16 +33,28 @@ body {
   background-color: blue;
   color: #fff;
   border-radius: 10px;
-  margin-top: -50px;
+  margin-bottom: 100px;
 }
+
+.createTrip {
+  margin-top: -50px;
+  margin-bottom: 100px;
+}
+.current h2 {
+  color: black;
+  font-size: 40px;
+}
+.current button {
+  width: 150px;
+}
+
 a {
   color: #00b7ff;
 }
 
 h2 {
-  color: rgb(4, 68, 206);
-  font-size: 75px;
-  text-shadow: -3px -3px 2px black;
+  color: rgb(73, 81, 99);
+  font-size: 65px;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: bolder;
 }
@@ -52,7 +81,7 @@ h3 {
 a {
   color: #00b7ff;
   text-decoration: none;
-  font-size: 1.5em;
+  font-size: 1em;
 }
 
 form {
@@ -142,38 +171,9 @@ ul li {
   font-weight: bold;
   font-size: 2em;
 }
-.settings {
-  text-align: center;
-  align-items: center;
-}
 
-.createATrip {
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  margin-bottom: 50px;
-  border: 3px solid rgb(68, 68, 71);
-  background-color: rgba(153, 186, 194, 0.365);
-  border-radius: 30px;
-  box-shadow: -4px -4px 5px black;
-  width: 600px;
-  height: 250px;
-}
 .createATrip h2 {
-  margin-top: 20px;
-}
-
-.welcome {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(4, 68, 206);
-  font-size: 90px;
-  text-shadow: -3px -3px 2px black;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-weight: bolder;
+  margin-top: -30px;
 }
 
 .logo {
@@ -200,30 +200,18 @@ ul li {
 }
 
 #logout {
+  position: relative;
+  left: -200px;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 #logout button {
-  margin-left: -300px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   width: 100px;
   font-size: 15px;
   color: white;
   border-radius: 10px;
   box-shadow: -4px -4px 8px black;
-}
-
-.page {
-  background-color: rgb(220, 234, 238);
-  margin: 10px;
-  width: 98%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  box-shadow: -6px -6px 4px black;
 }
 
 .error {
