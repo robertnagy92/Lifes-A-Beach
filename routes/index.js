@@ -192,7 +192,7 @@ router.post("/length/:id", (req, res, next) => {
         oneWeek = 550;
       }
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
-      hotelCost = oneWeek * lux * lengthInWeeks;
+      hotelCost = total + oneWeek * lux * lengthInWeeks;
       total = hotelCost + car + food;
       saveEach = Math.floor(total / weeksUntilTrip);
 
