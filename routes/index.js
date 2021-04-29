@@ -173,6 +173,8 @@ router.post("/length/:id", (req, res, next) => {
         (trip.approxDate - new Date()) / 1000 / 60 / 60 / 24 / 7
       );
       let car = trip.car * lengthInWeeks;
+      //food is 280($40 a day for a week) multipied by how many weeks
+      let food = 280 * lengthInWeeks;
       let saveEach = trip.saveEach;
       let oneWeek = 0;
       let hotelCost = 0;
@@ -191,10 +193,8 @@ router.post("/length/:id", (req, res, next) => {
       }
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
       hotelCost = oneWeek * lux * lengthInWeeks;
-      console.log(total);
-      total = hotelCost + car;
+      total = hotelCost + car + food;
       saveEach = Math.floor(total / weeksUntilTrip);
-      console.log(total, car);
 
       //update length of vacation in DB the length of the vacation and the total cost of it
       Trip.findByIdAndUpdate(id, { lengthInWeeks, total, saveEach })
