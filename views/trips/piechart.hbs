@@ -20,11 +20,12 @@
 
       let options = {
         pieSliceText: 'label',
-        title: '',
-        pieStartAngle: 110,
         pieHole: 0.2,
-        is3D: true,
-      };
+        title: 'Your Holiday Expanses',
+        pieStartAngle: 110,
+        is3D: true
+      
+      }
         let chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }
