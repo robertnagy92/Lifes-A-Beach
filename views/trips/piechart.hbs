@@ -2,28 +2,27 @@
  <br/> <br/>
  <br/> <br/>
  <br/> <br/>
- <h1>Total: {{total}}</h1>
  <br/> <br/>
+  <h1>Total: {{total}}</h1>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
+        let data = google.visualization.arrayToDataTable([
           ['Expanses', 'Total costs(in percenteges)'],
-          ['German',  50],
-          ['French',  20],
-          ['Italian', 20],
-          ['Romansh', 10]
+          ['Hotel',  {{hotel}}],
+          ['Food',  {{food}}],
+          ['Flight', {{flight}}],
+          ['Car Rental', {{car}}]
         ]);
 
-      var options = {
+      let options = {
         pieSliceText: 'label',
         title: 'Your Holiday Expanses',
-        pieStartAngle: 100,
+        pieStartAngle: 110,
       };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        let chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }
     </script>
