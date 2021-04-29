@@ -3,23 +3,27 @@
  <br/> <br/>
  <br/> <br/>
  <br/> <br/>
+
+ <h1 class="welcome2">Your Dream Vacation: {{name}}</h1>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         let data = google.visualization.arrayToDataTable([
-          ['Expanses', 'Total costs(in percenteges)'],
-          ['Hotel',  {{hotel}}],
-          ['Food',  {{food}}],
-          ['Flight', {{flight}}],
-          ['Car Rental', {{car}}]
+          [' Expenses', 'Total costs(in percenteges)'],
+          [' Hotel ',  {{hotel}}],
+          [' Food',  {{food}}],
+          [' Flight', {{flight}}],
+          [' Car ', {{car}}]
         ]);
 
       let options = {
         pieSliceText: 'label',
-        title: 'Your Holiday Expanses',
+        title: '',
         pieStartAngle: 110,
+        pieHole: 0.2,
+        is3D: true,
       };
         let chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
@@ -27,8 +31,8 @@
     </script>
   </head>
   <body>
-    <div id="piechart" style="width: 900px; height: 400px;"></div>
-   <h1>Total: {{total}}</h1>
+    <div id="piechart" class="fade-in" style="width: 600px; height: 400px;"></div>
+   <h1 class="welcome2">Estimated Total:<h1 class="green">${{total}}</h1></h1>
     <form action="/piechart/{{id}}" method="POST">
       <button>Home</button>
     </form>

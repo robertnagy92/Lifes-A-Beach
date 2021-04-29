@@ -262,6 +262,7 @@ router.get("/piechart/:id", (req, res) => {
       food: trip.food,
       flight: trip.flightCost,
       hotel: trip.hotelCost,
+      name: trip.name,
     });
   });
 });
