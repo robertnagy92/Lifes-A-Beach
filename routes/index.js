@@ -131,6 +131,25 @@ router.post("/luxury/:id", (req, res, next) => {
     .catch((err) => res.redirect("../views/error.hbs"));
 });
 
+//Get route to show *******car rental****** page after luxury page
+router.get("/car/:id", (req, res) => {
+  const { id } = req.params;
+  res.render("trips/car", { id });
+});
+
+//POST route for luxury page
+router.post("/car/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { luxury } = req.body;
+
+  //update the luxury level in the DB
+  Trip.findByIdAndUpdate(id, { car })
+    .then((data) => {
+      res.redirect(`/length/${data._id}`);
+    })
+    .catch((err) => res.redirect("../views/error.hbs"));
+});
+
 //******Length of trip page ********
 //Get route to show length of the vaction (1wk, 2wks. 3wks) after luxury page
 router.get("/length/:id", (req, res) => {
