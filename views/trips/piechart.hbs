@@ -4,6 +4,7 @@
  <br/> <br/>
  <br/> <br/>
   <h1>Total: {{total}}</h1>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
@@ -29,10 +30,8 @@
   </head>
   <body>
     <div id="piechart" style="width: 900px; height: 400px;"></div>
-  </body>
-
-
 
 <form action="/piechart/{{id}}" method="POST">
 <button>Home</button>
 </form>
+  </body>
