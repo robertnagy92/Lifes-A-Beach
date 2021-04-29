@@ -49,23 +49,29 @@ router.get("/destination/:id", (req, res) => {
 router.post("/destination/:id", (req, res, next) => {
   //get the information for DB
   const { id } = req.params;
-  const { destination } = req.body;
+  let { destination, flightCost } = req.body;
   let total = 0;
   if (destination == "Honolulu") {
-    total += 1300;
+    flightCost = 1300;
+    total += flightCost;
   } else if (destination == "Tahiti") {
-    total += 1200;
+    flightCost = 1200;
+    total += flightCost;
   } else if (destination == "Bali") {
-    total += 600;
+    flightCost = 600;
+    total += flightCost;
   } else if (destination == "Australia") {
-    total += 400;
+    flightCost = 400;
+    total += flightCost;
   } else if (destination == "California") {
-    total += 700;
+    flightCost = 700;
+    total += flightCost;
   } else if (destination == "Mexico") {
-    total += 800;
+    flightCost = 800;
+    total += flightCost;
   }
   //go to the DB and update destination
-  Trip.findByIdAndUpdate(id, { destination, total })
+  Trip.findByIdAndUpdate(id, { destination, total, flightCost })
     .then((data) => {
       res.redirect(`/budget/${data._id}`);
     })
@@ -172,6 +178,7 @@ router.post("/length/:id", (req, res, next) => {
       let weeksUntilTrip = Math.ceil(
         (trip.approxDate - new Date()) / 1000 / 60 / 60 / 24 / 7
       );
+      let flightCost = trip.flightCost;
       let car = trip.car * lengthInWeeks;
       //food is 280($40 a day for a week) multipied by how many weeks
       let food = 280 * lengthInWeeks;
@@ -192,12 +199,13 @@ router.post("/length/:id", (req, res, next) => {
         oneWeek = 550;
       }
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
-      hotelCost = total + oneWeek * lux * lengthInWeeks;
-      total = hotelCost + car + food;
+      hotelCost = oneWeek * lux * lengthInWeeks;
+      total = hotelCost + flightCost + car + food;
       saveEach = Math.floor(total / weeksUntilTrip);
+      console.log(hotelCost, flightCost, car, food);
 
       //update length of vacation in DB the length of the vacation and the total cost of it
-      Trip.findByIdAndUpdate(id, { lengthInWeeks, total, saveEach })
+      Trip.findByIdAndUpdate(id, { lengthInWeeks, total, saveEach, hotelCost })
         .then((data) => {
           res.redirect(`/total/${data._id}`);
         })
@@ -236,11 +244,21 @@ router.post("/total/:id", (req, res, next) => {
       .catch((err) => res.redirect("../views/error.hbs"));
   });
 });
-
 //Get route to show pichart page after total page, breaking down the expenses
 router.get("/piechart/:id", (req, res) => {
   const { id } = req.params;
-  res.render("trips/piechart", { id });
+  Trip.findById(id).then((trip) => {
+    res.render("trips/piechart.hbs", {
+      id,
+      total: trip.total,
+      saveEach: trip.saveEach,
+      budget: trip.budget,
+      car: trip.car,
+      food: 280,
+      flight: trip.flightCost,
+      hotel: trip.hotelCost,
+    });
+  });
 });
 //POST route to update total page
 router.post("/piechart/:id", (req, res, next) => {

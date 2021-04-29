@@ -9,6 +9,10 @@ const tripSchema = new Schema({
     type: String,
   },
 
+  flightCost: {
+    type: Number,
+  },
+
   budget: {
     type: Number,
   },
@@ -30,6 +34,10 @@ const tripSchema = new Schema({
   },
 
   food: {
+    type: Number,
+  },
+
+  hotelCost: {
     type: Number,
   },
 
