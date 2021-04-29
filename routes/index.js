@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const Trip = require("../models/Trip.model");
 
-
 /**All Routes******/
 
 /* landing page */
@@ -9,10 +8,24 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
+//*********(D)elete Routes*********
+router.post("/home/:id/delete", (req, res, next) => {
+  //recieve id from user
+  const { id } = req.params;
+  //delete he element fromt he DB
+  Trip.findByIdAndDelete(id)
+    .then((data) => {
+      res.redirect("/home");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 //****Create a trip page***** */
 //POST route for *create* page
 router.get("/create", (req, res) => {
-    res.render("trips/create")
+  res.render("trips/create");
 });
 router.post("/trips/create", (req, res, next) => {
   //check info being sent from user
@@ -23,7 +36,7 @@ router.post("/trips/create", (req, res, next) => {
     .then((data) => {
       res.redirect(`/destination/${data._id}`);
     })
-    .catch((err) => res.render("../public/images/404.jpeg"));
+    .catch((err) => res.redirect("/total"));
 });
 
 //********Destination Page********* */
@@ -39,24 +52,24 @@ router.post("/destination/:id", (req, res, next) => {
   const { destination } = req.body;
   let total = 0;
   if (destination == "Honolulu") {
-    total += 1000;
+    total += 1300;
   } else if (destination == "Tahiti") {
-    total += 1500;
-  } else if (destination == "Bali") {
-    total += 2000;
-  } else if (destination == "Australia") {
-    total += 2000;
-  } else if (destination == "California") {
     total += 1200;
+  } else if (destination == "Bali") {
+    total += 600;
+  } else if (destination == "Australia") {
+    total += 400;
+  } else if (destination == "California") {
+    total += 700;
   } else if (destination == "Mexico") {
-    total += 1400;
+    total += 800;
   }
   //go to the DB and update destination
   Trip.findByIdAndUpdate(id, { destination, total })
     .then((data) => {
       res.redirect(`/budget/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //******budget page ******/
@@ -76,7 +89,7 @@ router.post("/budget/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/timeuntil/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //********time until the trip page**********/
@@ -96,7 +109,7 @@ router.post("/timeuntil/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/luxury/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //Get route to show *******luxury****** page after time until page
@@ -115,7 +128,7 @@ router.post("/luxury/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/length/${data._id}`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
 
 //******Length of trip page ********
@@ -144,7 +157,7 @@ router.post("/length/:id", (req, res, next) => {
       let oneWeek = 0;
       let hotelCost = 0;
       if (destination == "Honolulu") {
-        oneWeek = 1000;
+        oneWeek = 300;
       } else if (destination == "Tahiti") {
         oneWeek = 1200;
       } else if (destination == "Bali") {
@@ -152,9 +165,9 @@ router.post("/length/:id", (req, res, next) => {
       } else if (destination == "Australia") {
         oneWeek = 1000;
       } else if (destination == "California") {
-        oneWeek = 1000;
+        oneWeek = 900;
       } else if (destination == "Mexico") {
-        oneWeek = 600;
+        oneWeek = 550;
       }
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
       hotelCost = oneWeek * lux * lengthInWeeks;
@@ -166,10 +179,10 @@ router.post("/length/:id", (req, res, next) => {
         .then((data) => {
           res.redirect(`/total/${data._id}`);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => res.redirect("../views/error.hbs"));
     })
     .catch((err) => {
-      console.log(err);
+      res.redirect("../views/error.hbs");
     });
 });
 
@@ -177,11 +190,12 @@ router.post("/length/:id", (req, res, next) => {
 router.get("/total/:id", (req, res) => {
   const { id } = req.params;
   Trip.findById(id).then((trip) => {
-    const { total, saveEach } = req.body;
     res.render("trips/total.hbs", {
       id,
       total: trip.total,
       saveEach: trip.saveEach,
+      budget: trip.budget,
+      possible: trip.total < trip.budget,
     });
   });
 });
@@ -189,7 +203,7 @@ router.get("/total/:id", (req, res) => {
 //POST route to update total page
 router.post("/total/:id", (req, res, next) => {
   const { id } = req.params;
-  const { total, saveEach } = req.body;
+  const { total, saveEach, budget } = req.body;
   //Updating the total and how much to save every month variable
   Trip.findById(id).then((trip) => {
     //update the total in the DB
@@ -197,7 +211,7 @@ router.post("/total/:id", (req, res, next) => {
       .then((data) => {
         res.redirect(`/piechart/${data._id}`);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => res.redirect("../views/error.hbs"));
   });
 });
 
@@ -214,23 +228,7 @@ router.post("/piechart/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/home`);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
-
-//*********Delete Route*********
-// // Delete one of the trips planned
-// router.post("/trips/:id/delete", (req, res, next) => {
-//   //recieve id from user
-//   const { id } = req.params;
-
-//   //delete he element fromt he DB
-//   Trip.findByIdAndDelete(id)
-//     .then((data) => {
-//       res.redirect("/home");
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
 
 module.exports = router;

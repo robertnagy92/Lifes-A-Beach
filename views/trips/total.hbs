@@ -1,3 +1,6 @@
+<div class="settings">
+{{#if possible}}
+
 <h2 class="tot">Estimated total cost of your trip is...</h2>
 
 <h1 class="green">${{total}}</h1>
@@ -5,10 +8,16 @@
 <h2 class="tot">You will need to save every week:</h2>
 
 <h1 class="green">${{saveEach}}</h1>
-<h3 class="tot">To be able to go on this vacation</h3>
+
+{{else}}
+<h1>We are really sorry,</h1>
+<h1>You cannot take this trip with your budget</h1>
+<h3>Please change your trip to resolve the problem</h3>
+{{/if}}
+
 
 <form action="/total/{{id}}" method="POST">
-<button>Next</button>
-</form>
-
+  <button>Next</button>
+  </form>
+</div>
 

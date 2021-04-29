@@ -15,25 +15,23 @@
 
    <body>
 
-  
    <nav class="navbar fixed-top navbar-expand-md navbar-light bg-warning justify-content-center shadow p-3 mb-5 rounded fade-in">
     <a class="navbar-brand" >
-    <img src="/images/logo.png" width="35" height="30" class="d-inline-block align-center" alt="logo">
+    <img src="/images/logo.png" width="35" height="30" class="d-inline-block align-center navSty1" alt="logo">
   </a>
        <a href="/" type="button" class="navbar-brand btn-sm btn text-white navBut"><i class="fa fa-home fa-fw" aria-hidden="true"></i></a>
        <a href="/signup" type="button" class="navbar-brand btn-sm btn text-white navBut">Sign Up</a> 
        <a href="/signin" type="button" class="navbar-brand btn-sm btn text-white navBut">Login</a> 
-   </nav> 
+       <a href="/signin" type="button" class="navbar-brand btn-sm btn text-white navSty1">
+        <form action="/logout" method="POST" class="remy">
+ <button type="submit"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+ </form>
+ </a> 
+    
 
-  
+   </nav> 
        
    <span class="loader"><span class="loader-inner"></span></span>
-     <section>
-    <div class="wave wave1"> </div>
-    <div class="wave wave2"> </div>
-    <div class="wave wave3"> </div>
-    <div class="wave wave4"> </div>
-    </section>
     {{{body}}}
 
 
