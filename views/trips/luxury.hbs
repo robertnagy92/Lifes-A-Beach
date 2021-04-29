@@ -1,13 +1,16 @@
-<div class="settings">
-  <h2>Choose your preferred luxury level</h2>
+<h2 class="welcome2">Choose your preferred luxury level</h2>
 
-  <form action="/luxury/{{id}}" method="POST">
-  <label for="luxury">Luxury level:</label>
-  <select name="luxury" id="luxury">
-    <option value="1.5">Premium</option>
-    <option value="1">Basic</option>
-    <option value=".75">Budget</option> 
-  </select>
-  <button>Next</button>
-  </form>
-</div>
+
+<form action="/luxury/{{id}}" method="POST">
+<label for="luxury" class="welcome2">Luxury level:</label>
+
+<select name="luxury" id="luxury" class="formMenu">
+  
+  <option value="1.5">Premium</option>
+  <option value="1">Basic</option>
+  <option value=".75">Budget</option>
+  
+</select>
+
+<button>Next</button>
+</form>

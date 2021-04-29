@@ -1,18 +1,19 @@
-<div class="settings">
-  
+
+<img src="/images/logo.png" alt="logo">
+
 {{#if name}}
-<h2>List of your current vacations planned:</h2>
+<h2 class="welcome2">List of your current vacations planned:</h2>
   <ul>
     <li>{{name}}</li>
   </ul>
 {{/if}}
 
-  <h2>Create a new Vacation plan!</h2>
-  <form action="/trips/create" method="POST">
+<h2 class="welcome2">Create a new Vacation plan!</h2>
+<form action="/trips/create" method="POST">
 
-    <label for="name">Trip Name</label>
-    <input type = "text" name ="name">
-
+  <label for="name" class="welcome2" >Trip Name</label>
+  <input type = "text" name ="name">
+    
     <br>
 
     <button type="submit">Create</button>
