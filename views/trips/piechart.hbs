@@ -10,7 +10,7 @@
       function drawChart() {
         let data = google.visualization.arrayToDataTable([
           ['Expanses', 'Total costs(in percenteges)'],
-          ['Hotel',  {{hotel}}],
+          ['Hotel', {{hotel}}],
           ['Food',  {{food}}],
           ['Flight', {{flight}}],
           ['Car Rental', {{car}}]
@@ -18,17 +18,20 @@
 
       let options = {
         pieSliceText: 'label',
+        pieHole: 0.1,
         title: 'Your Holiday Expanses',
         pieStartAngle: 110,
-      };
+        is3D: true
+      
+      }
         let chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }
     </script>
   </head>
   <body>
-    <div id="piechart" style="width: 900px; height: 400px;"></div>
-   <h1>Total: {{total}}</h1>
+    <div id="piechart" class="fade-in" style="width: 900px; height: 400px;"></div>
+   <h1>Total:<h1 class="green">${{total}}<h1/></h1>
     <form action="/piechart/{{id}}" method="POST">
       <button>Home</button>
     </form>
