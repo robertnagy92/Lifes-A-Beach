@@ -1,50 +1,48 @@
 const router = require("express").Router();
-const passport = require('passport')
+const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const Google = require("../models/Google.model.js");
 const User = require("../models/User.model")
-
+const authorize = require("../middleware/index")
+const Trip = require("../models/Trip.model")
 
 //Auth with Google
-router.get('/google', passport.authenticate('google', {scope: ['profile']}))
+router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 //Google auth callback
 router.get('/google/callback/', passport.authenticate('google', {failureRedirect: '/'}),
     (req, res) => {
-   res.redirect('/home')
+   res.render('auth/home')
 
   
 })
-
-
 
 router.get('/signup', (_, res, next) => {
   res.status(200).render('auth/signup')
 });
 
-
-router.post('/signup', (req, res, next) => {
+router.post("/signup", (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    res.render('auth/signup', { msg: 'All fields are mandatory. Please enter your username and password' })
+    res.render("auth/signup", {
+      msg: "All fields are mandatory. Please enter your username and password",
+    });
   }
 
   const passwordFormatRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
   if (!passwordFormatRegex.test(password)) {
-    res.status(200).render("auth/signup", { msg: "Password needs to at least 8 characters, 1 uppercase and a number" });
+    res.status(200).render("auth/signup", {
+      msg: "Password needs to at least 8 characters, 1 uppercase and a number",
+    });
     return;
   }
 
-  User
-    .findOne({ username })
-    .then(user => {
-
+  User.findOne({ username })
+    .then((user) => {
       const salt = bcrypt.genSaltSync(12);
       const hashPassword = bcrypt.hashSync(password, salt);
 
-      User
-        .create({ username, password: hashPassword })
+      User.create({ username, password: hashPassword })
         .then((newUser) => {
           req.session.user = newUser;
           res.redirect("/home");
@@ -58,68 +56,72 @@ router.post('/signup', (req, res, next) => {
             });
           } else {
             res.status(500).render("auth/signup", {
-              msg: "Oops, something went wrong with our server. Please try again",
+              msg:
+                "Oops, something went wrong with our server. Please try again",
             });
           }
         });
     })
     .catch((err) => {
-    console.error(`Error while creating new user: ${err}`)
-  })
+      console.error(`Error while creating new user: ${err}`);
+    });
 });
-router.get('/home', (req, res) => {
+
+router.get("/home", authorize, (req, res) => {
   const { user } = req.session;
-  res.status(200).render("auth/home", user);
+  Trip.find({ owner: user._id }).then((data) => {
+    res.render("auth/home", { user, data });
+  });
 });
 
-router.get('/signin', (_, res) => {
-  res.status(200).render('auth/signin');
+router.get("/signin", (_, res) => {
+  res.status(200).render("auth/signin");
 });
 
-router.post('/signin', (req, res, next) => {
+router.post("/signin", (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    res.render('auth/signin', { msg: 'All fiels are mandatory. Please provide your username and password' })
+    res.render("auth/signin", {
+      msg: "All fiels are mandatory. Please provide your username and password",
+    });
   }
-  User
-    .findOne({ username })
+  User.findOne({ username })
     .then((foundUser) => {
       if (!foundUser) {
-        res.status(200).render('auth/signin', { msg: `Username doesn't exist` });
+        res
+          .status(200)
+          .render("auth/signin", { msg: `Username doesn't exist` });
         return;
       }
 
       bcrypt
         .compare(password, foundUser.password)
-        .then(verifiedStatus => {
-
+        .then((verifiedStatus) => {
           if (verifiedStatus) {
             req.session.user = foundUser;
-            res.redirect('/home');
+            res.redirect("/home");
           } else {
-            res.status(200).render('auth/signin', { msg: 'The password is incorrect!' });
+            res
+              .status(200)
+              .render("auth/signin", { msg: "The password is incorrect!" });
           }
-
         })
         .catch((err) => {
           console.error(`Error while comparing: ${err}`);
           next();
-        })
+        });
     })
     .catch((err) => {
       console.log(`Error finding: ${err}`);
       next(err);
-    })
-    
+    });
 });
 
-
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.redirect('/');
+    res.redirect("/");
   });
 });
-
 
 module.exports = router;

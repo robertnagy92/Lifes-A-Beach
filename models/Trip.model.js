@@ -25,6 +25,15 @@ const tripSchema = new Schema({
     enum: ["Premium", "Basic", "Budget"],
   },
 
+  total: {
+    type: Number,
+    default: 0,
+  },
+
+  saveEach: {
+    type: Number,
+  },
+
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User",

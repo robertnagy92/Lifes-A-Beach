@@ -1,28 +1,24 @@
 
-<img src="../public/images/pngjoy.com_superman-clipart-pixel-art-superman-hd-png-download_9435808.png">
-<div class="settings">
-  <br>
-<a href="/">Go back</a>
-<br>
-{{#if username}}
-<a href="/main">Main</a>
-<br>
-<a href="/private">Private</a>
-<h2>Welcome, {{ username }}!</h2>
-<p>This is your profile!</p>
-{{else}}
-<a href="/main">Main</a>
-<br>
-<a href="/private">Private</a>
-<h2>Welcome, {{ username}}!</h2>
-<p>This is your profile!</p>
-<p>Still no logged in user, sorry!</p>
-{{/if}}
- 
- <form action="/logout" method="POST">
-<button type="submit">Logout</button>
- </form>
- <h2>Create a trip</h2>
+<div class="homeTop">
+<i class="fa fa-arrow-left googleIcon1 or" aria-hidden="true"><a href="/" class="googleIcon1 backT">Back</a></i>
 
-<a href="/create">Create</a>
+<h1 class="welcome2">Welcome, {{ user.username }}!</h1>
+
+<div class="welcome2">
+  <h2>List of current trips:</h2>
+  {{#each data}}
+    <h3>Trip Name: <a href="/piechart/{{id}}">{{name}}</a></h3>
+    <form action="/home/{{id}}/delete" method="POST">
+  <button>Delete</button>
+</form>
+  {{/each}}
 </div>
+
+  <div class="welcome2">
+  <h2>Create a trip</h2>  
+  <a class="navbar-brand btn-sm btn text-white shadow-black" href="/create">Start</a>
+
+  </div>
+  </div>
+
+

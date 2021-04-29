@@ -8,6 +8,9 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bootstrap-icons": "^1.4.1",
+    "chart.js": "^3.2.0",
+    "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^4.4.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
