@@ -202,7 +202,6 @@ router.post("/length/:id", (req, res, next) => {
       hotelCost = oneWeek * lux * lengthInWeeks;
       total = hotelCost + flightCost + car + food;
       saveEach = Math.floor(total / weeksUntilTrip);
-      console.log(total);
 
       //update length of vacation in DB the length of the vacation and the total cost of it
       Trip.findByIdAndUpdate(id, {
@@ -263,6 +262,7 @@ router.get("/piechart/:id", (req, res) => {
       food: trip.food,
       flight: trip.flightCost,
       hotel: trip.hotelCost,
+      name: trip.name,
     });
   });
 });

@@ -1,30 +1,33 @@
-
 #indexHbs {
-   margin-top: 1rem;
+  margin-top: 1rem;
 }
 #indexHbs2 {
-   margin-top: 3rem;
-   text-shadow: 2px 2px black;
+  margin-top: 3rem;
+  text-shadow: 2px 2px black;
 }
 
 .homeTop {
-   margin-top: 5rem;
+  margin-top: 5rem;
 }
 #logo-img {
   height: 15rem;
   width: 15rem;
 }
 .googleIcon {
-  color: red
+  color: red;
 }
 .googleIcon1 {
   color: white;
 }
 
-.navBut:hover, .navBut:focus, .navBut:active, .navBut.active, .open>.dropdown-toggle.navBut {
-    color: #fff;
-    background-color: #00b3db;
-    border-color: #285e8e;
+.navBut:hover,
+.navBut:focus,
+.navBut:active,
+.navBut.active,
+.open > .dropdown-toggle.navBut {
+  color: #fff;
+  background-color: #00b3db;
+  border-color: #285e8e;
 }
 .or {
   margin-bottom: 2rem;
@@ -34,13 +37,13 @@
   vertical-align: middle;
 }
 .logoAlign {
- margin-right: 5rem;
+  margin-right: 5rem;
 }
 .formMenu {
   margin-bottom: 10rem;
 }
 
- body {
+body {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,8 +51,6 @@
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: rgb(250, 232, 199);
 }
-
-
 
 select {
   margin-bottom: 20px;
@@ -120,21 +121,23 @@ a {
   color: white;
 }
 .welcome2 {
-   font-size: 20px;
+  font-size: 30px;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+.newClass {
+  font-size: 60px;
+  margin-bottom: 10rem;
   color: white;
   text-shadow: 2px 2px black;
 }
 
 body {
- 
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 .remy {
   margin: 0;
   padding: 0;
-  
-
-  
 }
 
 .navSty1 {
@@ -185,7 +188,6 @@ form button {
   text-decoration: none;
   text-transform: uppercase;
   transition: 0.3s ease;
-
 }
 
 form button:hover {
@@ -257,10 +259,7 @@ ul li {
 #delete {
   display: flex;
   align-items: center;
-} 
-
-
-
+}
 
 .fade-in {
   animation: fadeIn ease 4s;
@@ -271,19 +270,19 @@ ul li {
 }
 @keyframes fadeIn {
   0% {
-    opacity:0;
+    opacity: 0;
   }
   100% {
-    opacity:1;
+    opacity: 1;
   }
 }
 
 @-moz-keyframes fadeIn {
   0% {
-    opacity:0;
+    opacity: 0;
   }
   100% {
-    opacity:1;
+    opacity: 1;
   }
 }
 
@@ -309,30 +308,30 @@ ul li {
 
 @-webkit-keyframes fadeIn {
   0% {
-    opacity:0;
+    opacity: 0;
   }
   100% {
-    opacity:1;
+    opacity: 1;
   }
 }
 
 @-o-keyframes fadeIn {
   0% {
-    opacity:0;
+    opacity: 0;
   }
   100% {
-    opacity:1;
+    opacity: 1;
   }
 }
 
 @-ms-keyframes fadeIn {
   0% {
-    opacity:0;
+    opacity: 0;
   }
   100% {
-    opacity:1;
-};
-
-
-
-
+    opacity: 1;
+  }
+}
+#piechart {
+  background: rgb(155, 253, 253);
+}
