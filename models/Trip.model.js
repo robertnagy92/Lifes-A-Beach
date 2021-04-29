@@ -25,6 +25,10 @@ const tripSchema = new Schema({
     enum: ["Premium", "Basic", "Budget"],
   },
 
+  car: {
+    enum: ["SUV", "mid-size", "economy", "No car"],
+  },
+
   total: {
     type: Number,
     default: 0,
