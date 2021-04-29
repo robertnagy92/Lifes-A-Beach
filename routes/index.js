@@ -126,6 +126,25 @@ router.post("/luxury/:id", (req, res, next) => {
   //update the luxury level in the DB
   Trip.findByIdAndUpdate(id, { luxury })
     .then((data) => {
+      res.redirect(`/car/${data._id}`);
+    })
+    .catch((err) => res.redirect("../views/error.hbs"));
+});
+
+//Get route to show *******car rental****** page after luxury page
+router.get("/car/:id", (req, res) => {
+  const { id } = req.params;
+  res.render("trips/car", { id });
+});
+
+//POST route for luxury page
+router.post("/car/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { car } = req.body;
+
+  //update the luxury level in the DB
+  Trip.findByIdAndUpdate(id, { car })
+    .then((data) => {
       res.redirect(`/length/${data._id}`);
     })
     .catch((err) => res.redirect("../views/error.hbs"));
@@ -153,6 +172,9 @@ router.post("/length/:id", (req, res, next) => {
       let weeksUntilTrip = Math.ceil(
         (trip.approxDate - new Date()) / 1000 / 60 / 60 / 24 / 7
       );
+      let car = trip.car * lengthInWeeks;
+      //food is 280($40 a day for a week) multipied by how many weeks
+      let food = 280 * lengthInWeeks;
       let saveEach = trip.saveEach;
       let oneWeek = 0;
       let hotelCost = 0;
@@ -170,8 +192,8 @@ router.post("/length/:id", (req, res, next) => {
         oneWeek = 550;
       }
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
-      hotelCost = oneWeek * lux * lengthInWeeks;
-      total += hotelCost;
+      hotelCost = total + oneWeek * lux * lengthInWeeks;
+      total = hotelCost + car + food;
       saveEach = Math.floor(total / weeksUntilTrip);
 
       //update length of vacation in DB the length of the vacation and the total cost of it
