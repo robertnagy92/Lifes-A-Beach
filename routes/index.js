@@ -202,6 +202,7 @@ router.post("/length/:id", (req, res, next) => {
       hotelCost = oneWeek * lux * lengthInWeeks;
       total = hotelCost + flightCost + car + food;
       saveEach = Math.floor(total / weeksUntilTrip);
+      console.log(total);
 
       //update length of vacation in DB the length of the vacation and the total cost of it
       Trip.findByIdAndUpdate(id, {
@@ -240,15 +241,13 @@ router.post("/total/:id", (req, res, next) => {
   const { id } = req.params;
   const { total, saveEach, budget } = req.body;
   //Updating the total and how much to save every month variable
-  Trip.findById(id).then((trip) => {
-    //update the total in the DB
-    Trip.findByIdAndUpdate(id, { total })
-      .then((data) => {
-        res.redirect(`/piechart/${data._id}`);
-      })
-      .catch((err) => res.redirect("../views/error.hbs"));
-  });
+  Trip.findById(id)
+    .then((data) => {
+      res.redirect(`/piechart/${data._id}`);
+    })
+    .catch((err) => res.redirect("../views/error.hbs"));
 });
+
 //Get route to show pichart page after total page, breaking down the expenses
 router.get("/piechart/:id", (req, res) => {
   const { id } = req.params;
