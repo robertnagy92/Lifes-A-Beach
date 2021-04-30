@@ -3,7 +3,7 @@
 }
 #indexHbs2 {
   margin-top: 3rem;
-  text-shadow: 2px 2px black;
+  text-shadow: 1px 1px black;
 }
 
 .homeTop {
@@ -29,6 +29,21 @@
   background-color: #00b3db;
   border-color: #285e8e;
 }
+.navBut2 {
+   -webkit-text-stroke: 1px black;
+}
+
+.navBut2:hover,
+.navBut2:focus,
+.navBut2:active,
+.navBut2.active,
+.open > .dropdown-toggle.navBut {
+  color: #fff;
+  background-color: #00b3db;
+  border-color: #285e8e;
+}
+
+
 .or {
   margin-bottom: 2rem;
 }
@@ -123,8 +138,12 @@ a {
 .welcome2 {
   font-size: 30px;
   color: white;
-  text-shadow: 2px 2px black;
+  text-shadow: 1px 1px black;
 }
+.welcome3 {
+  text-shadow: 1px 1px black;
+}
+
 .newClass {
   font-size: 60px;
   margin-bottom: 10rem;

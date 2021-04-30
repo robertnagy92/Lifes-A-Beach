@@ -2,13 +2,13 @@
 <div class="homeTop">
 
 <h1 class="newClass">Welcome, {{ user.username }}!</h1>
-<i class="fa fa-arrow-left googleIcon1 or" aria-hidden="true"><a href="/" class="googleIcon1 backT">Back</a></i>
+<i class="fa fa-arrow-left googleIcon1 or" aria-hidden="true"><a href="/" class="googleIcon1 backT welcome3">Back</a></i>
 <div class="welcome2">
-  <h2>List of current trips:</h2>
+  <h2 class="welcome3">List of current trips:</h2>
   {{#each data}}
-    <h3>Trip Name: <a class="bg-primary border border-info text-white rounded" href="/piechart/{{id}}">{{name}}</a></h3>
+    <h3>Trip Name: <a class="text-warning rounded navBut2" href="/piechart/{{id}}">{{name}}</a></h3>
     <form action="/home/{{id}}/delete" method="POST">
-  <button class="bg-primary">Delete</button>
+  <button class="bg-danger">Delete</button>
 </form>
   {{/each}}
 </div>
