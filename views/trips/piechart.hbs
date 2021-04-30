@@ -4,7 +4,7 @@
  <br/> <br/>
  <br/> <br/>
 
- <h1 class="welcome2">Your Dream Vacation: {{name}}</h1>
+ <h1 class="welcome2 fade-in">Your Dream Vacation: {{name}}</h1>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
@@ -33,8 +33,8 @@
   </head>
   <body>
     <div id="piechart" class="fade-in" style="width: 600px; height: 400px;"></div>
-   <h1 class="welcome2">Estimated Total:<h1 class="green">${{total}}</h1></h1>
-    <form action="/piechart/{{id}}" method="POST">
+   <h1 class="welcome2 fade-in">Estimated Total:<h1 class="green fade-in">${{total}}</h1></h1>
+    <form action="/piechart/{{id}}" method="POST" class="fade-in">
       <button>Home</button>
     </form>
   </body>

@@ -1,24 +1,24 @@
 <section class="settings homeTop googleIcon1">
   <h3 class="welcome3">New here?</h3>
-  <h4 class="welcome3">Sign up now!</h4>
+  <h4 class="welcome3 fade-in">Sign up now!</h4>
 
   <form action="/signup" method="post">
-    <label for="username" class="googleIcon1 welcome3">Username:</label>
-    <input type="text" name="username" placeholder="Enter username" >
-    <label for="password" class="googleIcon1 welcome3">Password:</label>
-    <input type="password" name="password" placeholder="Enter password" >
-    <button type="submit">Submit</button>
+    <label for="username" class="googleIcon1 welcome3 fade-in">Username:</label>
+    <input type="text" name="username" placeholder="Enter username" class="fade-in" >
+    <label for="password" class="googleIcon1 welcome3 fade-in">Password:</label>
+    <input type="password" name="password" placeholder="Enter password" class="fade-in">
+    <button type="submit" class="fade-in">Submit</button>
   </form>
 
-  <i class="fa fa-arrow-left googleIcon1 or welcome3" aria-hidden="true"><a href="/" class="googleIcon1 backT">Back</a></i>
-<h4 class=>Or</h4>
+  <i class="fa fa-arrow-left googleIcon1 or fade-in" aria-hidden="true"><a href="/" class="googleIcon1 backT fade-in">Back</a></i>
+<h4 class="fade-in">Or</h4>
   {{#if msg}}
   
   <p>{{msg}}</p> 
 
   {{/if}}
 
-<i class="fa fa-google fa-3x googleIcon welcome3" aria-hidden="false"><a href="/auth/google" class="googleIcon1">oogle</a></i>
+<i class="fa fa-google fa-3x googleIcon welcome3 fade-in" aria-hidden="false"><a href="/auth/google" class="googleIcon1 fade-in">oogle</a></i>
 </section>
 
 

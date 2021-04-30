@@ -1,17 +1,17 @@
 
-<div class="homeTop">
+<div class="homeTop fade-in">
 
 <h1 class="newClass">Welcome, {{ user.username }}!</h1>
-<i class="fa fa-arrow-left googleIcon1 or" aria-hidden="true"><a href="/" class="googleIcon1 backT welcome3">Back</a></i>
 <div class="welcome2">
-  <h2 class="welcome3">List of current trips:</h2>
+  <h3 class="welcome3">List of current trips:</h3>
   {{#each data}}
-    <h3>Trip Name: <a class="text-warning rounded navBut2" href="/piechart/{{id}}">{{name}}</a></h3>
+    <h4>Trip Name: <a class="text-warning rounded navBut2" href="/piechart/{{id}}">{{name}}</a></h4>
     <form action="/home/{{id}}/delete" method="POST">
-  <button class="bg-danger">Delete</button>
-</form>
+      <button class="bg-danger">Delete</button>
+    </form>
   {{/each}}
 </div>
+<i class="fa fa-arrow-left googleIcon1 or" aria-hidden="true"><a href="/" class="googleIcon1 backT welcome3">Back</a></i>
 
   <div class="welcome2">
   <h2>Create a trip</h2>  

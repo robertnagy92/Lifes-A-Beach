@@ -1,15 +1,15 @@
 
-<img src="/images/logo.png" alt="logo">
+<img src="/images/logo.png" class="fade-in" alt="logo">
 
 {{#if name}}
-<h2 class="welcome2">List of your current vacations planned:</h2>
+<h2 class="welcome2 fade-in">List of your current vacations planned:</h2>
   <ul>
     <li>{{name}}</li>
   </ul>
 {{/if}}
 
-<h2 class="welcome2">Create a new Vacation plan!</h2>
-<form action="/trips/create" method="POST">
+<h2 class="welcome2 fade-in">Create a new Vacation plan!</h2>
+<form action="/trips/create" method="POST" class="fade-in">
 
   <label for="name" class="welcome2" >Trip Name</label>
   <input type = "text" name ="name">

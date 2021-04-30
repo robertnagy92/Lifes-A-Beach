@@ -2,12 +2,12 @@
   margin-top: 1rem;
 }
 #indexHbs2 {
-  margin-top: 3rem;
+  margin-top: 1rem;
   text-shadow: 1px 1px black;
 }
 
 .homeTop {
-  margin-top: 5rem;
+  margin-top: 2rem;
 }
 #logo-img {
   height: 15rem;
@@ -111,7 +111,7 @@ select {
   font-size: 40px;
 }
 .current button {
-  width: 150px;
+  width: 100px;
 }
 
 a {
@@ -145,8 +145,8 @@ a {
 }
 
 .newClass {
-  font-size: 60px;
-  margin-bottom: 10rem;
+  font-size: 40px;
+  margin-bottom: 2rem;
   color: white;
   text-shadow: 2px 2px black;
 }
@@ -281,11 +281,11 @@ ul li {
 }
 
 .fade-in {
-  animation: fadeIn ease 4s;
-  -webkit-animation: fadeIn ease 4s;
-  -moz-animation: fadeIn ease 4s;
-  -o-animation: fadeIn ease 4s;
-  -ms-animation: fadeIn ease 4s;
+  animation: fadeIn ease 2.2s;
+  -webkit-animation: fadeIn ease 2.2s;
+  -moz-animation: fadeIn ease 2.2s;
+  -o-animation: fadeIn ease 2.2s;
+  -ms-animation: fadeIn ease 2.2s;
 }
 @keyframes fadeIn {
   0% {
