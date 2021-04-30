@@ -69,6 +69,21 @@ router.post("/destination/:id", (req, res, next) => {
   } else if (destination == "Mexico") {
     flightCost = 800;
     total += flightCost;
+  } else if (destination == "Canary Islands") {
+    flightCost = 200;
+    total += flightCost;
+  } else if (destination == "Maldives") {
+    flightCost = 900;
+    total += flightCost;
+  } else if (destination == "Thailand") {
+    flightCost = 450;
+    total += flightCost;
+  } else if (destination == "Brazil") {
+    flightCost = 300;
+    total += flightCost;
+  } else if (destination == "Bahamas") {
+    flightCost = 550;
+    total += flightCost;
   }
   //go to the DB and update destination
   Trip.findByIdAndUpdate(id, { destination, total, flightCost })
@@ -197,6 +212,16 @@ router.post("/length/:id", (req, res, next) => {
         oneWeek = 900;
       } else if (destination == "Mexico") {
         oneWeek = 550;
+      } else if (destination == "Canary Islands") {
+        oneWeek = 300;
+      } else if (destination == "Maldives") {
+        oneWeek = 1500;
+      } else if (destination == "Thailand") {
+        oneWeek = 250;
+      } else if (destination == "Brazil") {
+        oneWeek = 200;
+      } else if (destination == "Bahamas") {
+        oneWeek = 1800;
       }
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
       hotelCost = oneWeek * lux * lengthInWeeks;
