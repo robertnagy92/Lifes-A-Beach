@@ -36,7 +36,7 @@ router.post("/trips/create", (req, res, next) => {
     .then((data) => {
       res.redirect(`/destination/${data._id}`);
     })
-    .catch((err) => res.redirect("/total"));
+    .catch((err) => console.log(err));
 });
 
 //********Destination Page********* */
@@ -69,13 +69,28 @@ router.post("/destination/:id", (req, res, next) => {
   } else if (destination == "Mexico") {
     flightCost = 800;
     total += flightCost;
+  } else if (destination == "Canary Islands") {
+    flightCost = 200;
+    total += flightCost;
+  } else if (destination == "Maldives") {
+    flightCost = 900;
+    total += flightCost;
+  } else if (destination == "Thailand") {
+    flightCost = 450;
+    total += flightCost;
+  } else if (destination == "Brazil") {
+    flightCost = 300;
+    total += flightCost;
+  } else if (destination == "Bahamas") {
+    flightCost = 550;
+    total += flightCost;
   }
   //go to the DB and update destination
   Trip.findByIdAndUpdate(id, { destination, total, flightCost })
     .then((data) => {
       res.redirect(`/budget/${data._id}`);
     })
-    .catch((err) => res.redirect("../views/error.hbs"));
+    .catch((err) => console.log(err));
 });
 
 //******budget page ******/
@@ -95,7 +110,7 @@ router.post("/budget/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/timeuntil/${data._id}`);
     })
-    .catch((err) => res.redirect("../views/error.hbs"));
+    .catch((err) => console.log(err));
 });
 
 //********time until the trip page**********/
@@ -115,7 +130,7 @@ router.post("/timeuntil/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/luxury/${data._id}`);
     })
-    .catch((err) => res.redirect("../views/error.hbs"));
+    .catch((err) => console.log(err));
 });
 
 //Get route to show *******luxury****** page after time until page
@@ -134,7 +149,7 @@ router.post("/luxury/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/car/${data._id}`);
     })
-    .catch((err) => res.redirect("../views/error.hbs"));
+    .catch((err) => console.log(err));
 });
 
 //Get route to show *******car rental****** page after luxury page
@@ -153,7 +168,7 @@ router.post("/car/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/length/${data._id}`);
     })
-    .catch((err) => res.redirect("../views/error.hbs"));
+    .catch((err) => console.log(err));
 });
 
 //******Length of trip page ********
@@ -197,6 +212,16 @@ router.post("/length/:id", (req, res, next) => {
         oneWeek = 900;
       } else if (destination == "Mexico") {
         oneWeek = 550;
+      } else if (destination == "Canary Islands") {
+        oneWeek = 300;
+      } else if (destination == "Maldives") {
+        oneWeek = 1500;
+      } else if (destination == "Thailand") {
+        oneWeek = 250;
+      } else if (destination == "Brazil") {
+        oneWeek = 200;
+      } else if (destination == "Bahamas") {
+        oneWeek = 1800;
       }
       //hotel cost is the length(one week * the luxury level) multiplied by the num of weeks
       hotelCost = oneWeek * lux * lengthInWeeks;
@@ -214,7 +239,7 @@ router.post("/length/:id", (req, res, next) => {
         .then((data) => {
           res.redirect(`/total/${data._id}`);
         })
-        .catch((err) => res.redirect("../views/error.hbs"));
+        .catch((err) => console.log(err));
     })
     .catch((err) => {
       res.redirect("../views/error.hbs");
@@ -244,7 +269,7 @@ router.post("/total/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/piechart/${data._id}`);
     })
-    .catch((err) => res.redirect("../views/error.hbs"));
+    .catch((err) => console.log(err));
 });
 
 //Get route to show pichart page after total page, breaking down the expenses
@@ -274,7 +299,7 @@ router.post("/piechart/:id", (req, res, next) => {
     .then((data) => {
       res.redirect(`/home`);
     })
-    .catch((err) => res.redirect("../views/error.hbs"));
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
