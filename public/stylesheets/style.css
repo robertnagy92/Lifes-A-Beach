@@ -29,6 +29,17 @@
   background-color: #00b3db;
   border-color: #285e8e;
 }
+
+.navBut2:hover,
+.navBut2:focus,
+.navBut2:active,
+.navBut2.active,
+.open > .dropdown-toggle.navBut {
+  color: blue;
+  background-color: #00b3db;
+  border-color: #285e8e;
+}
+
 .or {
   margin-bottom: 2rem;
 }
