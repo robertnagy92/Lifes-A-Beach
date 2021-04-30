@@ -19,7 +19,6 @@ const app = express();
 require("./config")(app);
 
 
-
 // default value for title local
 const projectName = "LifesABeach";
 const capitalized = (string) =>
@@ -50,8 +49,6 @@ app.use(
 );
 
 //By default it will create a  sessions collection in that DB
-
-
 
 // 👇 Start handling routes here
 app.use("/", require("./routes/index"));
