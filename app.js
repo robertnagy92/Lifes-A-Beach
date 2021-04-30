@@ -18,9 +18,6 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require("./config")(app);
 
-//Passport config
-const passport = require('passport')
-require('./config/passport')(passport)
 
 
 // default value for title local
@@ -54,9 +51,6 @@ app.use(
 
 //By default it will create a  sessions collection in that DB
 
-//Passport middleware
-app.use(passport.initialize())
-app.use(passport.session())
 
 
 // 👇 Start handling routes here
