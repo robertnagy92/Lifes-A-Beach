@@ -67,12 +67,6 @@ User new Schema ({ email: String, required: true, password: String, minlength: 6
 
 https://whimsical.com/life-s-a-beach-XwrJiGYjuuWT3GEJYyR51P
 
-### Git
-
-https://github.com/robertnagy92/Lifes-A-Beach
-[Homepage]
-
 ### Deployed Version
 
 https://lifes-a-beach.herokuapp.com/
-[Link]
