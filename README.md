@@ -72,6 +72,7 @@ https://whimsical.com/life-s-a-beach-XwrJiGYjuuWT3GEJYyR51P
 https://github.com/robertnagy92/Lifes-A-Beach
 [Homepage]
 
-### Slides
+### Deployed Version
 
-[Presentation]
+https://lifes-a-beach.herokuapp.com/
+[Link]
